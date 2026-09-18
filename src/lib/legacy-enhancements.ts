@@ -1109,7 +1109,7 @@ function setupRoomsPage(): Cleanup[] {
 
   container.innerHTML = `
     <section class="text-center max-w-3xl mx-auto mb-16">
-      <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-6" style="font-size: clamp(1.9rem, 8.5vw, 4rem)">Accommodations</h1>
+      <h1 class="font-display-xl text-display-lg-mobile md:text-display-xl mb-6">Accommodations</h1>
       <p class="font-body-lg text-body-lg text-on-surface-variant">Loading live room availability…</p>
     </section>
   `;
@@ -1173,7 +1173,7 @@ function setupRoomsPage(): Cleanup[] {
 
     container.innerHTML = `
       <section class="text-center max-w-3xl mx-auto mb-16">
-        <h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-6" style="font-size: clamp(1.9rem, 8.5vw, 4rem)">Accommodations</h1>
+        <h1 class="font-display-xl text-display-lg-mobile md:text-display-xl mb-6">Accommodations</h1>
         <p class="font-body-lg text-body-lg text-on-surface-variant">Discover live rates and capacity directly from Nyakaju.</p>
         <p class="mt-4 font-label-lg text-primary">${dateSummary}</p>
         <p class="mt-2 font-body-md text-on-surface-variant">${escapeHtml(guestSummary(adults, children))}</p>

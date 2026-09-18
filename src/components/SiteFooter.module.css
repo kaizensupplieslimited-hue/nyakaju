@@ -1,6 +1,8 @@
 .footer {
+  overflow: hidden;
   color: #fff;
   background: #000;
+  border-radius: clamp(2rem, 4vw, 4.5rem) clamp(2rem, 4vw, 4.5rem) 0 0;
   font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -52,7 +54,7 @@
 .topRow h2 {
   margin: 0;
   color: #fff;
-  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.025em;
@@ -66,16 +68,17 @@
 
 .contactLinks {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px 28px;
-  margin-top: 26px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 22px;
 }
 
 .contactLinks a,
 .contactLinks span {
   color: rgba(255, 255, 255, 0.88);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.45;
   text-decoration: none;
 }
 
@@ -208,9 +211,7 @@
   }
 
   .contactLinks {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    gap: 8px;
   }
 
   .social {
