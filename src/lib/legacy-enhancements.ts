@@ -977,8 +977,8 @@ function setupGalleryPage(): Cleanup[] {
   }
 
   if (carousel) {
-    const image = carousel.querySelector<HTMLImageElement>("[data-gallery-image]");
-    const counter = carousel.querySelector<HTMLElement>("[data-gallery-counter]");
+    const images = Array.from(carousel.querySelectorAll<HTMLImageElement>("[data-gallery-image]"));
+    const counters = Array.from(carousel.querySelectorAll<HTMLElement>("[data-gallery-counter]"));
     const slides = [
       { alt: "A serene wide-angle shot of a luxury resort infinity pool seamlessly blending into a calm, glassy lake at dawn.", number: 1 },
       { alt: "A modern resort suite with natural wood accents and warm morning light.", number: 2 },
@@ -994,17 +994,22 @@ function setupGalleryPage(): Cleanup[] {
 
     const showSlide = (nextIndex: number) => {
       activeIndex = (nextIndex + slides.length) % slides.length;
-      const slide = slides[activeIndex];
-      if (!image) return;
 
-      image.src = `/media/gallery/gallery_${slide.number}-768.webp`;
-      image.srcset = [768, 1280, 1920]
-        .map((width) => `/media/gallery/gallery_${slide.number}-${width}.webp ${width}w`)
-        .join(", ");
-      image.alt = slide.alt;
-      if (counter) {
+      images.forEach((image) => {
+        const offset = Number(image.dataset.galleryOffset ?? 0);
+        const slideIndex = (activeIndex + offset + slides.length) % slides.length;
+        const slide = slides[slideIndex];
+
+        image.src = `/media/gallery/gallery_${slide.number}-768.webp`;
+        image.srcset = [768, 1280, 1920]
+          .map((width) => `/media/gallery/gallery_${slide.number}-${width}.webp ${width}w`)
+          .join(", ");
+        image.alt = slide.alt;
+      });
+
+      counters.forEach((counter) => {
         counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
-      }
+      });
     };
 
     const clickHandler = (event: Event) => {
