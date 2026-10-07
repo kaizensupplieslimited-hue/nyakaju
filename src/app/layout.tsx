@@ -14,7 +14,7 @@ const montserrat = Montserrat({
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html className={`scroll-smooth ${montserrat.variable}`} lang="en">
-      <body>
+      <body id="top">
         <Script src="/home-nav-scroll.js" strategy="beforeInteractive" />
         {children}
       </body>

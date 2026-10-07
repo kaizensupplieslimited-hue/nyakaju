@@ -34,15 +34,17 @@ export function SiteFooter() {
         <div className={styles.content}>
           <div className={styles.topRow}>
             <section className={styles.contact} aria-label="Contact The Nyakaju">
-              <Image
-                className={styles.contactLogo}
-                src="/remote-images/AB6AXuCVKM6L1uOBsBdOrbb4.png"
-                alt="The Nyakaju"
-                width={251}
-                height={58}
-              />
+              <a className={styles.footerLogoLink} href="#top" aria-label="Back to the top of this page">
+                <Image
+                  className={styles.contactLogo}
+                  src="/remote-images/AB6AXuCVKM6L1uOBsBdOrbb4.png"
+                  alt="The Nyakaju"
+                  width={251}
+                  height={58}
+                />
+              </a>
               <div className={styles.contactLinks}>
-                <a href="tel:+256782173076">+256 782 173 076</a>
+                <span>+256 782 173 076</span>
                 <a href="mailto:info@nyakaju.com">info@nyakaju.com</a>
                 <span>Tomosi Farm Rwakitura</span>
               </div>
@@ -52,9 +54,9 @@ export function SiteFooter() {
               <p className={styles.eyebrow}>Follow the journey</p>
               <h2 id="footer-social-heading">Stay Connected</h2>
               <div className={styles.socialLinks}>
-                <a href="#" aria-label="Instagram"><InstagramIcon /></a>
-                <a href="#" aria-label="TikTok"><TikTokIcon /></a>
-                <a href="#" aria-label="LinkedIn"><LinkedInIcon /></a>
+                <span className={styles.socialPlaceholder} role="img" aria-label="Instagram"><InstagramIcon /></span>
+                <span className={styles.socialPlaceholder} role="img" aria-label="TikTok"><TikTokIcon /></span>
+                <span className={styles.socialPlaceholder} role="img" aria-label="LinkedIn"><LinkedInIcon /></span>
               </div>
             </section>
           </div>
