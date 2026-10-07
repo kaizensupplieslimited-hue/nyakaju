@@ -1109,7 +1109,7 @@ function setupRoomsPage(): Cleanup[] {
 
   container.innerHTML = `
     <section class="text-center max-w-3xl mx-auto mb-16">
-      <h1 class="font-display-xl font-bold tracking-[-0.01em] md:tracking-[-0.02em] text-[2rem] leading-[2.5rem] md:text-display-xl mb-6">Accommodations</h1>
+      <h1 class="font-display-xl font-bold tracking-[-0.01em] md:tracking-[-0.02em] text-[2rem] leading-[2.5rem] md:text-display-xl mb-6">Accommodation</h1>
       <p class="font-body-lg text-body-lg text-on-surface-variant">Loading live room availability…</p>
     </section>
   `;
@@ -1139,9 +1139,9 @@ function setupRoomsPage(): Cleanup[] {
       return `
         <section id="${escapeHtml(room.slug)}-suite" class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${index ? "mt-12 border-t border-surface-variant pt-12" : ""}">
           <div class="order-2 lg:order-1 lg:col-span-5 space-y-8">
-            <div class="flex items-center gap-3 flex-wrap">
+            <div class="flex flex-col items-start gap-3">
               <h2 class="font-headline-lg font-semibold tracking-[0.01em] md:tracking-[0.02em] text-[1.75rem] leading-[2.25rem] md:text-[2.25rem] md:leading-[2.75rem]">${escapeHtml(room.name)}</h2>
-              <span class="font-label-lg text-label-lg text-on-primary bg-primary px-3 py-1.5 rounded-full uppercase tracking-[0.16em]"><strong>$${Number(room.nightlyRate).toLocaleString()}</strong>/night</span>
+              <span class="font-label-lg text-label-lg text-on-primary-container bg-primary-container/30 px-3 py-1.5 rounded-full ring-1 ring-primary-container/30 uppercase tracking-[0.16em]"><strong>$${Number(room.nightlyRate).toLocaleString()}</strong>/night</span>
             </div>
             <p class="font-body-lg text-body-lg text-on-surface-variant">${escapeHtml(room.description)}</p>
             <div class="flex flex-wrap gap-6 font-label-lg text-label-lg uppercase tracking-[0.1em] text-primary">
@@ -1173,7 +1173,7 @@ function setupRoomsPage(): Cleanup[] {
 
     container.innerHTML = `
       <section class="text-center max-w-3xl mx-auto mb-16">
-        <h1 class="font-display-xl font-bold tracking-[-0.01em] md:tracking-[-0.02em] text-[2rem] leading-[2.5rem] md:text-display-xl mb-6">Accommodations</h1>
+        <h1 class="font-display-xl font-bold tracking-[-0.01em] md:tracking-[-0.02em] text-[2rem] leading-[2.5rem] md:text-display-xl mb-6">Accommodation</h1>
         <p class="font-body-lg text-body-lg text-on-surface-variant">Discover live rates and capacity directly from Nyakaju.</p>
         <p class="mt-4 font-label-lg text-primary">${dateSummary}</p>
         <p class="mt-2 font-body-md text-on-surface-variant">${escapeHtml(guestSummary(adults, children))}</p>
