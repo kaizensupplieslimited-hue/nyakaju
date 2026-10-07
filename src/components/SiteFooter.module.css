@@ -207,20 +207,42 @@
   }
 
   .topRow {
-    flex-direction: column;
-    gap: 18px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .contactLogo {
+    width: min(112px, 34vw);
   }
 
   .contactLinks {
-    gap: 8px;
+    gap: 6px;
   }
 
   .social {
-    text-align: left;
+    text-align: right;
   }
 
   .socialLinks {
-    justify-content: flex-start;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .socialLinks a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .socialLinks svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .topRow h2 {
+    font-size: 1rem;
   }
 
   .brandRow {
