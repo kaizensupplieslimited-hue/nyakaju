@@ -142,7 +142,7 @@ function renderHomepageRooms(rooms: PublicRoom[]): Cleanup[] {
       <article class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div class="order-2 lg:order-1 lg:col-span-5 lg:pr-4">
           <div class="flex flex-wrap items-center gap-4 mb-8">
-            <h3 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">${escapeHtml(room.name)}</h3>
+            <h3 class="font-headline-lg font-semibold tracking-[0.01em] md:tracking-[0.02em] text-[1.75rem] leading-[2.25rem] md:text-[2.25rem] md:leading-[2.75rem] text-on-surface">${escapeHtml(room.name)}</h3>
             <span class="rounded-full bg-primary px-4 py-2 font-label-lg text-label-lg uppercase tracking-[0.14em] text-on-primary"><strong>${escapeHtml(price)}</strong>/night</span>
           </div>
           <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">${escapeHtml(room.description)}</p>
