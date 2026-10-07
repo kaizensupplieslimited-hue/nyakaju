@@ -141,9 +141,9 @@ function renderHomepageRooms(rooms: PublicRoom[]): Cleanup[] {
     container.innerHTML = `
       <article class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div class="order-2 lg:order-1 lg:col-span-5 lg:pr-4">
-          <div class="flex flex-wrap items-center gap-4 mb-8">
+          <div class="flex flex-col items-start gap-3 mb-8">
             <h3 class="font-headline-lg font-semibold tracking-[0.01em] md:tracking-[0.02em] text-[1.75rem] leading-[2.25rem] md:text-[2.25rem] md:leading-[2.75rem] text-on-surface">${escapeHtml(room.name)}</h3>
-            <span class="rounded-full bg-primary px-4 py-2 font-label-lg text-label-lg uppercase tracking-[0.14em] text-on-primary"><strong>${escapeHtml(price)}</strong>/night</span>
+            <span class="rounded-full bg-primary-container/30 px-3 py-1.5 font-label-lg text-label-lg uppercase tracking-[0.16em] text-on-primary-container ring-1 ring-primary-container/30"><strong>${escapeHtml(price)}</strong>/night</span>
           </div>
           <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">${escapeHtml(room.description)}</p>
           <div class="flex flex-wrap gap-7 mb-7 font-label-lg text-label-lg uppercase tracking-[0.1em] text-primary">
@@ -156,7 +156,7 @@ function renderHomepageRooms(rooms: PublicRoom[]): Cleanup[] {
           </div>
         </div>
         <div class="order-1 lg:order-2 lg:col-span-7">
-          <div class="relative h-[320px] sm:h-[420px] lg:h-[560px] overflow-hidden rounded-xl bg-surface-container custom-shadow">
+          <div class="relative h-[320px] sm:h-[420px] lg:h-[500px] overflow-hidden rounded-xl bg-surface-container custom-shadow">
             <img class="h-full w-full object-cover" src="${escapeHtml(image.url)}" alt="${escapeHtml(image.alt || room.name)}" width="1280" height="853" loading="${roomIndex === 0 ? "eager" : "lazy"}" decoding="async">
             ${hasMultipleImages ? `
               <button type="button" data-home-room-action="previous-image" class="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black focus:outline-none focus:ring-2 focus:ring-white" aria-label="Previous ${escapeHtml(room.name)} image">
@@ -644,7 +644,10 @@ function setupMobileNavigation(): Cleanup[] {
   const setOpen = (isOpen: boolean) => {
     toggle.setAttribute("aria-expanded", String(isOpen));
     toggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
-    menu.classList.toggle("hidden", !isOpen);
+    menu.classList.remove("hidden");
+    menu.dataset.open = String(isOpen);
+    menu.setAttribute("aria-hidden", String(!isOpen));
+    menu.inert = !isOpen;
     if (icon) {
       icon.textContent = isOpen ? "close" : "menu";
     }
@@ -1154,7 +1157,7 @@ function setupRoomsPage(): Cleanup[] {
               : `<a href="${bookingHref(room, arrival, departure, adults, children, requestedRooms)}" class="group font-label-sm text-label-sm uppercase tracking-[0.16em] text-on-primary bg-black rounded-full px-5 py-3 hover:bg-primary transition-all flex items-center w-fit">Book ${requestedRooms > 1 ? `${requestedRooms} rooms` : "room"}</a>`}
           </div>
           <div class="order-1 lg:order-2 lg:col-span-7" data-room-gallery="${room.id}">
-            <div class="relative h-[320px] sm:h-[460px] lg:h-[560px] w-full overflow-hidden rounded-xl bg-surface-container shadow-sm">
+            <div class="relative h-[320px] sm:h-[460px] lg:h-[500px] w-full overflow-hidden rounded-xl bg-surface-container shadow-sm">
               <img data-room-gallery-image class="h-full w-full object-cover" alt="${escapeHtml(primary.alt)}" src="${escapeHtml(primary.url)}" width="1280" height="853" loading="${index === 0 ? "eager" : "lazy"}" fetchpriority="${index === 0 ? "high" : "low"}" decoding="async">
               ${galleryImages.length > 1 ? `
                 <button type="button" data-room-gallery-action="previous" data-room-id="${room.id}" class="absolute left-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black focus:outline-none focus:ring-2 focus:ring-white" aria-label="Previous ${escapeHtml(room.name)} image">
@@ -1554,10 +1557,10 @@ function setupCompleteBookingPage(): Cleanup[] {
       });
 
       const confirmation = document.createElement("div");
-      confirmation.className = "mb-8 rounded-xl bg-primary-container p-6 text-on-primary-container";
+      confirmation.className = "mb-8 rounded-xl border border-primary-container/40 bg-primary-container/30 p-6 text-on-primary-container";
       confirmation.innerHTML = `
-        <p class="font-label-lg uppercase tracking-widest mb-2">Booking request received</p>
-        <p class="font-headline-md text-2xl mb-2">${escapeHtml(result.confirmationCode)}</p>
+        <p class="mb-3 inline-flex rounded-full bg-primary px-3 py-1.5 font-label-lg uppercase tracking-widest text-white">Booking request received</p>
+        <p class="font-headline-md font-medium text-[1.125rem] leading-[1.625rem] mb-2">${escapeHtml(result.confirmationCode)}</p>
         <p>Keep this confirmation code. Your request is pending administrator review.</p>
       `;
       bookingForm.before(confirmation);
