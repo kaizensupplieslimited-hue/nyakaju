@@ -125,6 +125,37 @@ body {
   box-sizing: border-box;
 }
 
+/* Shared tactile interaction for text buttons and pill-style CTA links. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  button:not([aria-label]):not(.booking-calendar__day),
+  a[class~="rounded-full"]:not([aria-label]) {
+    transform-origin: center;
+    transition-property: transform, border-radius, background-color, color, border-color, box-shadow;
+    transition-duration: 325ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  button:not([aria-label]):not(.booking-calendar__day):not(:disabled):hover,
+  a[class~="rounded-full"]:not([aria-label]):hover {
+    border-radius: 0.875rem !important;
+    transform: scaleX(1.035);
+  }
+
+  button:not([aria-label]):not(.booking-calendar__day):not(:disabled):active,
+  a[class~="rounded-full"]:not([aria-label]):active {
+    transform: scale(0.97) scaleX(1.02);
+    transition-duration: 120ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:not([aria-label]):not(.booking-calendar__day),
+  a[class~="rounded-full"]:not([aria-label]) {
+    transform: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Shared date-range and occupancy picker */
 .booking-picker {
   position: relative;

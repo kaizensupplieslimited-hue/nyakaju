@@ -212,13 +212,13 @@
 <h1 class="font-display-lg font-bold md:font-semibold tracking-[-0.01em] text-[2.5rem] leading-[3rem] md:text-[3.25rem] md:leading-[3.75rem] text-on-surface mb-4">Confirm Your Staycation</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Please review your stay details and provide your information to secure your reservation at The Nyakaju.</p>
 </div>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
 <!-- Section 1: Stay Summary (Booking Information) -->
-<div class="lg:col-span-5 flex flex-col gap-8 order-2 lg:order-1 h-full">
-<div class="bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-surface-container-highest h-full">
-<h2 class="font-headline-md font-medium text-[1.5rem] leading-[2rem] md:text-headline-md text-on-surface mb-8 border-b border-surface-container-highest pb-4">Booking Summary</h2>
-<div class="flex items-start gap-6 mb-8">
-<div class="w-32 h-32 rounded-lg bg-surface-container-low overflow-hidden shrink-0">
+<div class="lg:col-span-5 flex flex-col gap-6 order-2 lg:order-1">
+<div class="bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-surface-container-highest">
+<h2 class="font-headline-md font-medium text-[1.5rem] leading-[2rem] md:text-headline-md text-on-surface mb-6 border-b border-surface-container-highest pb-3">Booking Summary</h2>
+<div class="flex items-start gap-5 mb-6">
+<div class="w-24 h-24 rounded-lg bg-surface-container-low overflow-hidden shrink-0">
 <img id="bookingRoomImage" class="w-full h-full object-cover" alt="A luxurious, minimalist hotel suite interior viewed from a low angle. The room features dark, moody lighting with soft warm glows from hidden architectural lights. A large plush bed is central, surrounded by earthy taupe and charcoal textured walls. Expansive windows reveal a serene nighttime cityscape. The mood is tranquil, exclusive, and high-end." src="/media/room_images/royal_bed-1280.webp" width="1280" height="853" fetchpriority="high" decoding="async">
 </div>
 <div>
@@ -233,12 +233,12 @@
 </div>
 </div>
 </div>
-<div id="roomCapacityMessage" class="hidden relative mb-8 rounded-xl border border-primary/30 bg-primary-container p-4 pr-12 font-body-md text-on-primary-container" role="status">
+<div id="roomCapacityMessage" class="hidden relative mb-6 rounded-xl border border-primary/30 bg-primary-container p-4 pr-12 font-body-md text-on-primary-container" role="status">
 <strong>Each room supports a maximum of two people.</strong>
 <span id="roomCapacityMessageText"></span>
 <button id="roomCapacityMessageClose" class="absolute right-3 top-2 flex h-8 w-8 items-center justify-center rounded-full text-2xl leading-none hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-primary" type="button" aria-label="Close room capacity message">×</button>
 </div>
-<div class="space-y-4 mb-8">
+<div class="space-y-3 mb-6">
 <div class="flex justify-between items-center font-body-md text-body-md text-on-surface-variant">
 <span class="">Arrival</span>
 <span id="bookingArrival" class="font-medium text-on-surface">--</span>
@@ -248,7 +248,7 @@
 <span id="bookingDeparture" class="font-medium text-on-surface">--</span>
 </div>
 </div>
-<div class="border-t border-surface-container-highest pt-6 space-y-4">
+<div class="border-t border-surface-container-highest pt-5 space-y-3">
 <div class="flex justify-between items-center font-body-md text-body-md text-on-surface-variant">
 <span class="">Rate per night</span>
 <span id="bookingRate">$120</span>
@@ -257,7 +257,7 @@
 <span class="">Number of rooms</span>
 <span id="bookingRoomCount">1 Room</span>
 </div>
-<div class="flex justify-between items-center font-headline-md font-medium text-[1.5rem] leading-[2rem] md:text-headline-md text-on-surface pt-4">
+<div class="flex justify-between items-center font-headline-md font-medium text-[1.5rem] leading-[2rem] md:text-headline-md text-on-surface pt-2">
 <span class="">Total</span>
 <span id="bookingTotal">--</span>
 </div>
@@ -266,11 +266,11 @@
 
 </div>
 <!-- Section 2: Guest Information Form -->
-<div class="lg:col-span-7 order-1 lg:order-2 h-full">
-<div class="bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.04)] h-full">
-<h2 class="font-headline-md font-medium text-[1.5rem] leading-[2rem] md:text-headline-md text-on-surface mb-8">Guest Details</h2>
-<form id="bookingForm" class="space-y-10">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="lg:col-span-7 order-1 lg:order-2">
+<div class="bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.04)]">
+<h2 class="font-headline-md font-medium text-[1.5rem] leading-[2rem] md:text-headline-md text-on-surface mb-6">Guest Details</h2>
+<form id="bookingForm" class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="luxury-field relative">
 <input class="luxury-input font-body-md text-body-md" id="firstName" name="firstName" autocomplete="given-name" placeholder=" " required="" type="text">
 <label class="luxury-label font-body-md text-body-md" for="firstName">First Name</label>
@@ -280,7 +280,7 @@
 <label class="luxury-label font-body-md text-body-md" for="lastName">Last Name</label>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="luxury-field relative">
 <input class="luxury-input font-body-md text-body-md" id="email" name="email" autocomplete="email" placeholder=" " required="" type="email">
 <label class="luxury-label font-body-md text-body-md" for="email">Email Address</label>
@@ -337,9 +337,9 @@
 
 
 <!-- Section 3: Primary Action -->
-<div class="pt-8 mt-8 border-t border-surface-container-highest flex flex-col md:flex-row items-center gap-6 justify-center">
+<div class="pt-5 mt-5 border-t border-surface-container-highest flex items-center justify-center">
 
-<button class="w-full md:w-auto bg-on-surface text-surface px-5 md:px-10 py-4 md:py-5 rounded-full font-label-lg font-semibold text-[0.75rem] leading-[1rem] md:text-label-lg tracking-[0.06em] md:tracking-[0.1em] whitespace-nowrap hover:bg-primary transition-colors flex items-center justify-center gap-2 md:gap-3 group" type="submit">
+<button class="w-auto bg-on-surface text-surface px-6 md:px-8 py-3 rounded-full font-label-lg font-semibold text-[0.75rem] leading-[1rem] tracking-[0.06em] md:tracking-[0.1em] whitespace-nowrap hover:bg-primary transition-colors flex items-center justify-center gap-2 group" type="submit">
                                 SUBMIT BOOKING
                                 <span class="material-symbols-outlined shrink-0 text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </button>
