@@ -1137,10 +1137,10 @@ function setupRoomsPage(): Cleanup[] {
       roomGalleries.set(room.id, { images: galleryImages, index: 0 });
       const soldOut = room.availableUnits < requestedRooms;
       return `
-        <section id="${escapeHtml(room.slug)}-suite" class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${index ? "mt-24 border-t border-surface-variant pt-24" : ""}">
+        <section id="${escapeHtml(room.slug)}-suite" class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${index ? "mt-12 border-t border-surface-variant pt-12" : ""}">
           <div class="order-2 lg:order-1 lg:col-span-5 space-y-8">
             <div class="flex items-center gap-3 flex-wrap">
-              <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg">${escapeHtml(room.name)}</h2>
+              <h2 class="font-headline-lg font-semibold tracking-[0.01em] md:tracking-[0.02em] text-[1.75rem] leading-[2.25rem] md:text-[2.25rem] md:leading-[2.75rem]">${escapeHtml(room.name)}</h2>
               <span class="font-label-lg text-label-lg text-on-primary bg-primary px-3 py-1.5 rounded-full uppercase tracking-[0.16em]"><strong>$${Number(room.nightlyRate).toLocaleString()}</strong>/night</span>
             </div>
             <p class="font-body-lg text-body-lg text-on-surface-variant">${escapeHtml(room.description)}</p>
