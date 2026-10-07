@@ -43,9 +43,9 @@
 }
 
 .eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 9px;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -54,14 +54,14 @@
 .topRow h2 {
   margin: 0;
   color: #fff;
-  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.025em;
 }
 
 .contactLogo {
-  width: min(220px, 70vw);
+  width: min(160px, 56vw);
   height: auto;
   filter: brightness(0) invert(1);
 }
