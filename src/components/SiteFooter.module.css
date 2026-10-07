@@ -39,7 +39,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 64px;
+  gap: 40px;
 }
 
 .eyebrow {
@@ -208,7 +208,7 @@
 
   .topRow {
     flex-direction: column;
-    gap: 32px;
+    gap: 18px;
   }
 
   .contactLinks {

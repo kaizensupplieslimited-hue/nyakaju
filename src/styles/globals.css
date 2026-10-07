@@ -522,20 +522,12 @@ body {
   }
 
   [data-mobile-menu] {
-    display: block !important;
-    visibility: hidden;
-    clip-path: inset(0 0 100% 0);
-    pointer-events: none;
-    transform-origin: top;
-    transition: clip-path 460ms cubic-bezier(0.76, 0, 0.24, 1), visibility 0s linear 460ms;
-    will-change: clip-path;
+    display: none !important;
   }
 
   [data-mobile-menu][data-open="true"] {
-    visibility: visible;
-    clip-path: inset(0);
+    display: block !important;
     pointer-events: auto;
-    transition: clip-path 460ms cubic-bezier(0.76, 0, 0.24, 1), visibility 0s;
   }
 
   body.booking-picker-open {

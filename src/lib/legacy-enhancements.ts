@@ -1557,9 +1557,9 @@ function setupCompleteBookingPage(): Cleanup[] {
       });
 
       const confirmation = document.createElement("div");
-      confirmation.className = "mb-8 rounded-xl border border-primary-container/40 bg-primary-container/30 p-6 text-on-primary-container";
+      confirmation.className = "mb-8 rounded-xl bg-primary-container p-6 text-on-primary-container";
       confirmation.innerHTML = `
-        <p class="mb-3 inline-flex rounded-full bg-primary px-3 py-1.5 font-label-lg uppercase tracking-widest text-white">Booking request received</p>
+        <p class="mb-3 inline-flex rounded-full bg-primary px-3 py-1.5 text-[0.625rem] font-semibold leading-4 uppercase tracking-widest text-white">Booking request received</p>
         <p class="font-headline-md font-medium text-[1.125rem] leading-[1.625rem] mb-2">${escapeHtml(result.confirmationCode)}</p>
         <p>Keep this confirmation code. Your request is pending administrator review.</p>
       `;
