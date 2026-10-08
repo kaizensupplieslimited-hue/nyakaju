@@ -516,6 +516,10 @@ body {
     overflow: hidden;
   }
 
+  body.booking-picker-open #home {
+    z-index: 100;
+  }
+
   .booking-picker,
   .booking-picker__triggers {
     display: block;
@@ -552,10 +556,20 @@ body {
   .booking-popover,
   .booking-picker--home .booking-popover {
     position: fixed;
-    inset: 1rem;
+    inset: max(0.75rem, env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right)) max(0.75rem, env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
     width: auto;
-    max-height: calc(100svh - 2rem);
+    max-height: calc(100dvh - 1.5rem);
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .booking-calendar-popover,
+  .booking-picker--home .booking-calendar-popover {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    padding: clamp(0.75rem, 3.5vw, 1.25rem);
   }
 
   .booking-popover__close {
@@ -574,21 +588,23 @@ body {
   .booking-calendar__day,
   .booking-calendar__blank {
     aspect-ratio: auto;
-    min-height: 2.65rem;
+    min-height: clamp(2.15rem, 10vw, 2.65rem);
   }
 
-  .booking-guest-popover {
+  .booking-guest-popover,
+  .booking-picker--home .booking-guest-popover {
     top: 50%;
     bottom: auto;
-    left: 1rem;
     transform: translateY(-50%);
+    padding: clamp(0.9rem, 4vw, 1.25rem) clamp(1rem, 5vw, 1.5rem);
   }
 
   #hero-bar {
-    left: 50vw;
-    width: calc(100vw - 2rem);
+    right: 1rem;
+    left: 1rem;
+    width: auto;
     overflow: visible;
-    translate: -50% 0;
+    translate: none;
     transform: none;
   }
 
@@ -602,6 +618,54 @@ body {
 
   .booking-picker--form .booking-picker__triggers {
     display: block;
+  }
+}
+
+@media (max-width: 380px), (max-height: 600px) {
+  .booking-popover__header {
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .booking-popover__title,
+  .booking-calendar__month-title {
+    font-size: 0.9rem;
+  }
+
+  .booking-calendar__month-title {
+    margin-bottom: 0.6rem;
+  }
+
+  .booking-calendar__nav button,
+  .booking-popover__close {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .booking-calendar__day,
+  .booking-calendar__blank {
+    min-height: 2rem;
+  }
+
+  .booking-calendar__hint {
+    margin-top: 0.65rem;
+    font-size: 0.72rem;
+  }
+
+  .booking-guests__row {
+    min-height: 3.1rem;
+  }
+
+  .booking-guests__stepper {
+    width: 8.5rem;
+    min-height: 2.4rem;
+    grid-template-columns: 2.4rem 1fr 2.4rem;
+  }
+
+  .booking-guests__actions {
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
   }
 }
 
