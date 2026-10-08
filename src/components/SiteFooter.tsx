@@ -52,7 +52,7 @@ export function SiteFooter() {
 
             <section className={styles.social} aria-labelledby="footer-social-heading">
               <p className={styles.eyebrow}>Follow the journey</p>
-              <h2 id="footer-social-heading">Stay Connected</h2>
+              <h2 id="footer-social-heading">Let&apos;s Connect</h2>
               <div className={styles.socialLinks}>
                 <span className={styles.socialPlaceholder} role="img" aria-label="Instagram"><InstagramIcon /></span>
                 <span className={styles.socialPlaceholder} role="img" aria-label="TikTok"><TikTokIcon /></span>
