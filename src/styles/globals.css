@@ -713,6 +713,17 @@ html.reveal-enhanced .reveal-right:not(.reveal-visible) {
     padding: clamp(0.9rem, 4vw, 1.25rem) clamp(1rem, 5vw, 1.5rem);
   }
 
+  .booking-picker--home .booking-popover {
+    position: absolute;
+    top: auto;
+    right: -0.75rem;
+    bottom: calc(100% + 0.75rem);
+    left: -0.75rem;
+    width: auto;
+    max-height: calc(100dvh - 1.5rem);
+    transform: none;
+  }
+
   #hero-bar {
     right: 1rem;
     left: 1rem;
@@ -735,7 +746,6 @@ html.reveal-enhanced .reveal-right:not(.reveal-visible) {
   }
 }
 
-<<<<<<< HEAD
 @media (max-width: 380px), (max-height: 600px) {
   .booking-popover__header {
     gap: 0.5rem;
@@ -781,11 +791,12 @@ html.reveal-enhanced .reveal-right:not(.reveal-visible) {
   .booking-guests__actions {
     margin-top: 0.65rem;
     padding-top: 0.65rem;
-=======
+  }
+}
+
 @media (max-width: 767px) and (prefers-reduced-motion: reduce) {
   [data-mobile-menu] {
     transition: none !important;
->>>>>>> 56e5fb76deb1bb4f4024476f087981dd7d613ed5
   }
 }
 
