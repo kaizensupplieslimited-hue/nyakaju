@@ -27,6 +27,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html className={`scroll-smooth ${montserrat.variable}`} lang="en">
       <body id="top">
         <Script src="/home-nav-scroll.js" strategy="beforeInteractive" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-4HCEQHS6FK"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4HCEQHS6FK');
+          `}
+        </Script>
         {children}
       </body>
     </html>
