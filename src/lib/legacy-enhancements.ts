@@ -141,9 +141,9 @@ function renderHomepageRooms(rooms: PublicRoom[]): Cleanup[] {
     container.innerHTML = `
       <article class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div class="order-2 lg:order-1 lg:col-span-5 lg:pr-4">
-          <div class="flex flex-wrap items-center gap-4 mb-8">
-            <h3 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">${escapeHtml(room.name)}</h3>
-            <span class="rounded-full bg-primary px-4 py-2 font-label-lg text-label-lg uppercase tracking-[0.14em] text-on-primary"><strong>${escapeHtml(price)}</strong>/night</span>
+          <div class="flex flex-col items-start gap-3 mb-8">
+            <h3 class="font-headline-lg font-semibold tracking-[0.01em] md:tracking-[0.02em] text-[1.75rem] leading-[2.25rem] md:text-[2.25rem] md:leading-[2.75rem] text-on-surface">${escapeHtml(room.name)}</h3>
+            <span class="rounded-full bg-primary-container/30 px-3 py-1.5 font-label-lg text-label-lg uppercase tracking-[0.16em] text-on-primary-container ring-1 ring-primary-container/30"><strong>${escapeHtml(price)}</strong>/night</span>
           </div>
           <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10">${escapeHtml(room.description)}</p>
           <div class="flex flex-wrap gap-7 mb-7 font-label-lg text-label-lg uppercase tracking-[0.1em] text-primary">
@@ -156,7 +156,7 @@ function renderHomepageRooms(rooms: PublicRoom[]): Cleanup[] {
           </div>
         </div>
         <div class="order-1 lg:order-2 lg:col-span-7">
-          <div class="relative h-[320px] sm:h-[420px] lg:h-[560px] overflow-hidden rounded-xl bg-surface-container custom-shadow">
+          <div class="relative h-[320px] sm:h-[420px] lg:h-[500px] overflow-hidden rounded-xl bg-surface-container custom-shadow">
             <img class="h-full w-full object-cover" src="${escapeHtml(image.url)}" alt="${escapeHtml(image.alt || room.name)}" width="1280" height="853" loading="${roomIndex === 0 ? "eager" : "lazy"}" decoding="async">
             ${hasMultipleImages ? `
               <button type="button" data-home-room-action="previous-image" class="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-colors hover:bg-black focus:outline-none focus:ring-2 focus:ring-white" aria-label="Previous ${escapeHtml(room.name)} image">
@@ -644,7 +644,10 @@ function setupMobileNavigation(): Cleanup[] {
   const setOpen = (isOpen: boolean) => {
     toggle.setAttribute("aria-expanded", String(isOpen));
     toggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
-    menu.classList.toggle("hidden", !isOpen);
+    menu.classList.remove("hidden");
+    menu.dataset.open = String(isOpen);
+    menu.setAttribute("aria-hidden", String(!isOpen));
+    menu.inert = !isOpen;
     if (icon) {
       icon.textContent = isOpen ? "close" : "menu";
     }
@@ -721,10 +724,16 @@ function observeReveals() {
     observer.observe(item);
   });
 
-  // Never leave content invisible if an injected legacy page misses an
-  // IntersectionObserver notification during hydration.
+  // Never leave above-the-fold content invisible if hydration races the
+  // first IntersectionObserver notification. Items farther down the page
+  // remain observed so their animation still follows the visitor's scroll.
   const revealFallbackId = window.setTimeout(() => {
-    revealItems.forEach((item) => item.classList.add("reveal-visible"));
+    revealItems.forEach((item) => {
+      const bounds = item.getBoundingClientRect();
+      if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+        item.classList.add("reveal-visible");
+      }
+    });
   }, 1200);
 
   return () => {
@@ -1109,7 +1118,7 @@ function setupRoomsPage(): Cleanup[] {
 
   container.innerHTML = `
     <section class="text-center max-w-3xl mx-auto mb-16">
-      <h1 class="font-display-xl text-display-lg-mobile md:text-display-xl mb-6">Accommodations</h1>
+      <h1 class="font-display-xl font-bold tracking-[-0.01em] md:tracking-[-0.02em] text-[2rem] leading-[2.5rem] md:text-display-xl mb-6">Accommodation</h1>
       <p class="font-body-lg text-body-lg text-on-surface-variant">Loading live room availability…</p>
     </section>
   `;
@@ -1137,11 +1146,11 @@ function setupRoomsPage(): Cleanup[] {
       roomGalleries.set(room.id, { images: galleryImages, index: 0 });
       const soldOut = room.availableUnits < requestedRooms;
       return `
-        <section id="${escapeHtml(room.slug)}-suite" class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${index ? "mt-24 border-t border-surface-variant pt-24" : ""}">
+        <section id="${escapeHtml(room.slug)}-suite" class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center ${index ? "mt-12 border-t border-surface-variant pt-12" : ""}">
           <div class="order-2 lg:order-1 lg:col-span-5 space-y-8">
-            <div class="flex items-center gap-3 flex-wrap">
-              <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg">${escapeHtml(room.name)}</h2>
-              <span class="font-label-lg text-label-lg text-on-primary bg-primary px-3 py-1.5 rounded-full uppercase tracking-[0.16em]"><strong>$${Number(room.nightlyRate).toLocaleString()}</strong>/night</span>
+            <div class="flex flex-col items-start gap-3">
+              <h2 class="font-headline-lg font-semibold tracking-[0.01em] md:tracking-[0.02em] text-[1.75rem] leading-[2.25rem] md:text-[2.25rem] md:leading-[2.75rem]">${escapeHtml(room.name)}</h2>
+              <span class="font-label-lg text-label-lg text-on-primary-container bg-primary-container/30 px-3 py-1.5 rounded-full ring-1 ring-primary-container/30 uppercase tracking-[0.16em]"><strong>$${Number(room.nightlyRate).toLocaleString()}</strong>/night</span>
             </div>
             <p class="font-body-lg text-body-lg text-on-surface-variant">${escapeHtml(room.description)}</p>
             <div class="flex flex-wrap gap-6 font-label-lg text-label-lg uppercase tracking-[0.1em] text-primary">
@@ -1154,7 +1163,7 @@ function setupRoomsPage(): Cleanup[] {
               : `<a href="${bookingHref(room, arrival, departure, adults, children, requestedRooms)}" class="group font-label-sm text-label-sm uppercase tracking-[0.16em] text-on-primary bg-black rounded-full px-5 py-3 hover:bg-primary transition-all flex items-center w-fit">Book ${requestedRooms > 1 ? `${requestedRooms} rooms` : "room"}</a>`}
           </div>
           <div class="order-1 lg:order-2 lg:col-span-7" data-room-gallery="${room.id}">
-            <div class="relative h-[320px] sm:h-[460px] lg:h-[560px] w-full overflow-hidden rounded-xl bg-surface-container shadow-sm">
+            <div class="relative h-[320px] sm:h-[460px] lg:h-[500px] w-full overflow-hidden rounded-xl bg-surface-container shadow-sm">
               <img data-room-gallery-image class="h-full w-full object-cover" alt="${escapeHtml(primary.alt)}" src="${escapeHtml(primary.url)}" width="1280" height="853" loading="${index === 0 ? "eager" : "lazy"}" fetchpriority="${index === 0 ? "high" : "low"}" decoding="async">
               ${galleryImages.length > 1 ? `
                 <button type="button" data-room-gallery-action="previous" data-room-id="${room.id}" class="absolute left-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-colors hover:bg-black focus:outline-none focus:ring-2 focus:ring-white" aria-label="Previous ${escapeHtml(room.name)} image">
@@ -1173,7 +1182,7 @@ function setupRoomsPage(): Cleanup[] {
 
     container.innerHTML = `
       <section class="text-center max-w-3xl mx-auto mb-16">
-        <h1 class="font-display-xl text-display-lg-mobile md:text-display-xl mb-6">Accommodations</h1>
+        <h1 class="font-display-xl font-bold tracking-[-0.01em] md:tracking-[-0.02em] text-[2rem] leading-[2.5rem] md:text-display-xl mb-6">Accommodation</h1>
         <p class="font-body-lg text-body-lg text-on-surface-variant">Discover live rates and capacity directly from Nyakaju.</p>
         <p class="mt-4 font-label-lg text-primary">${dateSummary}</p>
         <p class="mt-2 font-body-md text-on-surface-variant">${escapeHtml(guestSummary(adults, children))}</p>
@@ -1556,8 +1565,8 @@ function setupCompleteBookingPage(): Cleanup[] {
       const confirmation = document.createElement("div");
       confirmation.className = "mb-8 rounded-xl bg-primary-container p-6 text-on-primary-container";
       confirmation.innerHTML = `
-        <p class="font-label-lg uppercase tracking-widest mb-2">Booking request received</p>
-        <p class="font-headline-md text-2xl mb-2">${escapeHtml(result.confirmationCode)}</p>
+        <p class="mb-3 inline-flex rounded-full bg-primary px-3 py-1.5 text-[0.625rem] font-semibold leading-4 uppercase tracking-widest text-white">Booking request received</p>
+        <p class="font-headline-md font-medium text-[1.125rem] leading-[1.625rem] mb-2">${escapeHtml(result.confirmationCode)}</p>
         <p>Keep this confirmation code. Your request is pending administrator review.</p>
       `;
       bookingForm.before(confirmation);

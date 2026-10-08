@@ -39,13 +39,13 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 64px;
+  gap: 40px;
 }
 
 .eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 6px;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -54,16 +54,24 @@
 .topRow h2 {
   margin: 0;
   color: #fff;
+<<<<<<< HEAD
   font-size: clamp(1.25rem, 1.75vw, 1.625rem);
+=======
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+>>>>>>> 56e5fb76deb1bb4f4024476f087981dd7d613ed5
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.025em;
 }
 
 .contactLogo {
-  width: min(220px, 70vw);
+  width: min(130px, 48vw);
   height: auto;
   filter: brightness(0) invert(1);
+}
+
+.footerLogoLink {
+  display: inline-flex;
 }
 
 .contactLinks {
@@ -71,7 +79,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  margin-top: 22px;
+  margin-top: 12px;
 }
 
 .contactLinks a,
@@ -83,14 +91,12 @@
 }
 
 .contactLinks a {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
-  transition: color 180ms ease, border-color 180ms ease;
+  transition: color 180ms ease;
 }
 
 .contactLinks a:hover,
 .contactLinks a:focus-visible {
   color: #fff;
-  border-color: #fff;
 }
 
 .social {
@@ -102,10 +108,10 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  margin-top: 24px;
+  margin-top: 14px;
 }
 
-.socialLinks a {
+.socialPlaceholder {
   display: grid;
   width: 44px;
   height: 44px;
@@ -113,14 +119,14 @@
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  transition: color 220ms ease, background-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
 }
 
-.socialLinks a:hover,
-.socialLinks a:focus-visible {
+.socialPlaceholder:hover {
   color: #111;
   background: #fff;
-  transform: translateY(-2px);
+  box-shadow: 0 0 0 4px rgba(167, 155, 134, 0.18), 0 0 24px rgba(239, 225, 201, 0.72), 0 12px 28px rgba(0, 0, 0, 0.24);
+  transform: translateY(-5px) scale(1.05);
 }
 
 .socialLinks svg {
@@ -206,20 +212,42 @@
   }
 
   .topRow {
-    flex-direction: column;
-    gap: 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .contactLogo {
+    width: min(112px, 34vw);
   }
 
   .contactLinks {
-    gap: 8px;
+    gap: 6px;
   }
 
   .social {
-    text-align: left;
+    text-align: right;
   }
 
   .socialLinks {
-    justify-content: flex-start;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .socialPlaceholder {
+    width: 36px;
+    height: 36px;
+  }
+
+  .socialLinks svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .topRow h2 {
+    font-size: 1rem;
   }
 
   .brandRow {
@@ -247,8 +275,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .socialLinks a,
+  .socialPlaceholder,
   .contactLinks a {
     transition: none;
+  }
+
+  .socialPlaceholder:hover {
+    transform: none;
   }
 }
