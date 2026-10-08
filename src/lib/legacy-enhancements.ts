@@ -724,10 +724,16 @@ function observeReveals() {
     observer.observe(item);
   });
 
-  // Never leave content invisible if an injected legacy page misses an
-  // IntersectionObserver notification during hydration.
+  // Never leave above-the-fold content invisible if hydration races the
+  // first IntersectionObserver notification. Items farther down the page
+  // remain observed so their animation still follows the visitor's scroll.
   const revealFallbackId = window.setTimeout(() => {
-    revealItems.forEach((item) => item.classList.add("reveal-visible"));
+    revealItems.forEach((item) => {
+      const bounds = item.getBoundingClientRect();
+      if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+        item.classList.add("reveal-visible");
+      }
+    });
   }, 1200);
 
   return () => {
