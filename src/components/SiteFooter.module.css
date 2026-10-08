@@ -54,11 +54,7 @@
 .topRow h2 {
   margin: 0;
   color: #fff;
-<<<<<<< HEAD
-  font-size: clamp(1.25rem, 1.75vw, 1.625rem);
-=======
   font-size: clamp(1.1rem, 1.5vw, 1.4rem);
->>>>>>> 56e5fb76deb1bb4f4024476f087981dd7d613ed5
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.025em;
