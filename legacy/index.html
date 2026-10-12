@@ -187,14 +187,31 @@
         }
         @media (max-width: 767px) {
             #home {
-                min-height: 760px;
+                min-height: 38rem;
                 height: 100svh;
+            }
+            .slideshow-container > div > img {
+                object-position: center center;
+            }
+            .slideshow-container > div:nth-child(1) > img {
+                object-position: 66% center;
+            }
+            .slideshow-container > div:nth-child(2) > img,
+            .slideshow-container > div:nth-child(3) > img {
+                object-position: 56% center;
             }
             #hero-bar {
                 width: calc(100% - 2rem);
-                bottom: 1rem;
+                bottom: max(1rem, env(safe-area-inset-bottom));
                 border-radius: 1.5rem;
                 padding: 0.5rem;
+            }
+            #hero-bar .booking-picker__trigger {
+                min-height: 3.25rem;
+                padding: 0.35rem 0.75rem;
+            }
+            #homeDateTrigger .booking-picker__calendar-icon {
+                transform: none;
             }
             #hero-bar .availability-field {
                 width: 100%;
@@ -225,9 +242,19 @@
             #check-availability-btn {
                 display: block;
                 width: 100%;
-                padding: 0.75rem 1.125rem;
+                min-height: 2.75rem;
+                padding: 0.7rem 1.125rem;
                 border-radius: 1rem;
                 text-align: center;
+            }
+        }
+        @media (max-width: 380px), (max-height: 650px) {
+            #home {
+                min-height: 35.5rem;
+            }
+            #hero-bar {
+                width: calc(100% - 1.5rem);
+                bottom: max(0.75rem, env(safe-area-inset-bottom));
             }
         }
         .reveal {
@@ -301,37 +328,37 @@
 <div class="slideshow-container h-full w-full">
 <!-- Slide 1 -->
 <div class="active">
-<img class="w-full h-full object-cover object-center" alt="A sweeping wide-angle shot of a majestic luxury resort nestled in a lush, tropical forest during golden hour. The architecture is organic and minimalist, featuring expansive glass walls and natural wood finishes. Warm, amber sunlight filters through palm leaves, creating long shadows across a pristine stone patio. The atmosphere is quiet, serene, and deeply connected to nature."
+<img class="w-full h-full object-cover object-center" alt="The Nyakaju compound with a traditional round thatched building and guest accommodation."
  src="/media/home_slides/slide_1-1280.webp"
  srcset="/media/home_slides/slide_1-768.webp 768w, /media/home_slides/slide_1-1280.webp 1280w, /media/home_slides/slide_1-1920.webp 1920w"
  sizes="100vw" width="1920" height="1280" fetchpriority="high" decoding="async">
 </div>
 <!-- Slide 2 -->
 <div class="">
-<img class="w-full h-full object-cover object-center" alt="An intimate close-up of a luxury resort suite interior at dawn. Soft, ethereal blue morning light illuminates a plush king-sized bed with crisp white linens. Large floor-to-ceiling windows offer a view of a misty mountain range in the distance. The room features textured clay walls and minimalist brass fixtures, embodying quiet luxury and sophisticated comfort."
+<img class="w-full h-full object-cover object-center" alt="A yellow guest cottage surrounded by landscaped gardens at The Nyakaju."
  data-src="/media/home_slides/slide_2-1280.webp" data-srcset="/media/home_slides/slide_2-768.webp 768w, /media/home_slides/slide_2-1280.webp 1280w, /media/home_slides/slide_2-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async">
 </div>
 <!-- Slide 3 -->
 <div class="">
-<img class="w-full h-full object-cover object-center" alt="An expansive infinity pool that seems to merge seamlessly with the crystal-clear ocean beyond under a mid-day sun. The water is a vibrant turquoise, reflecting the cloudless sky. Minimalist white lounge chairs are perfectly aligned on a light-colored travertine deck. High-key lighting emphasizes the pristine, airy aesthetic of this exclusive coastal retreat."
+<img class="w-full h-full object-cover object-center" alt="The main yellow guesthouse and gardens at The Nyakaju."
  data-src="/media/home_slides/slide_3-1280.webp" data-srcset="/media/home_slides/slide_3-768.webp 768w, /media/home_slides/slide_3-1280.webp 1280w, /media/home_slides/slide_3-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async">
 </div>
 <!-- Slide 4 -->
 <div class="">
-<img class="w-full h-full object-cover object-center" alt="A gourmet dining terrace set against a dramatic volcanic cliffside at twilight. Elegant tables are set with fine white porcelain and flickering candles under a canopy of stars. The mood is romantic and exclusive, with deep shadows contrasted by the warm glow of subtle outdoor lighting. The overall style is editorial, sophisticated, and high-fashion."
+<img class="w-full h-full object-cover object-center" alt="A golden sunset over the water and rolling landscape near The Nyakaju."
  data-src="/media/home_slides/slide_4-1280.webp" data-srcset="/media/home_slides/slide_4-768.webp 768w, /media/home_slides/slide_4-1280.webp 1280w, /media/home_slides/slide_4-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async">
 </div>
 <!-- Slide 5 -->
 <div class="">
-<img class="w-full h-full object-cover object-center" alt="A holistic spa sanctuary featuring a private outdoor rain shower made of dark volcanic stone. Water cascades gracefully amidst tropical ferns and moss-covered rocks. The lighting is low-key and atmospheric, creating a moody, meditative environment. Natural textures of stone and water dominate the composition, evoking a sense of profound tranquility."
+<img class="w-full h-full object-cover object-center" alt="Guests beside a safari vehicle watching the sunset over the water."
  data-src="/media/home_slides/slide_5-1280.webp" data-srcset="/media/home_slides/slide_5-768.webp 768w, /media/home_slides/slide_5-1280.webp 1280w, /media/home_slides/slide_5-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async">
 </div>
 <!-- Additional Slides (6-10) for effect -->
-<div class=""><img class="w-full h-full object-cover object-center" alt="Aerial view of a secluded beach villa with a private jetty stretching into emerald waters. The villa features a thatched roof and open-plan living spaces. The surrounding environment is untouched, pristine jungle. The color palette is dominated by deep greens and bright teals, showcasing a luxury escape far from the world." data-src="/media/home_slides/slide_6-1280.webp" data-srcset="/media/home_slides/slide_6-768.webp 768w, /media/home_slides/slide_6-1280.webp 1280w, /media/home_slides/slide_6-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
-<div class=""><img class="w-full h-full object-cover object-center" alt="A minimalist architectural detail of the resort's lobby, showcasing the play of light and shadow on curved white plaster walls. A single, large sculptural ceramic vase sits on the floor. The composition is highly structured and clean, following a strict grid. The vibe is quiet luxury and artistic sophistication." data-src="/media/home_slides/slide_7-1280.webp" data-srcset="/media/home_slides/slide_7-768.webp 768w, /media/home_slides/slide_7-1280.webp 1280w, /media/home_slides/slide_7-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
-<div class=""><img class="w-full h-full object-cover object-center" alt="A lush private courtyard at night, illuminated by hidden lanterns that cast soft patterns on sand-colored paths. A small, tranquil koi pond sits in the center. The surrounding architecture is low-slung and unobtrusive. The mood is peaceful and evokes an atmosphere of ancient, timeless luxury and calm." data-src="/media/home_slides/slide_8-1280.webp" data-srcset="/media/home_slides/slide_8-768.webp 768w, /media/home_slides/slide_8-1280.webp 1280w, /media/home_slides/slide_8-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
-<div class=""><img class="w-full h-full object-cover object-center" alt="A modern living space within a penthouse suite, featuring a large neutral-toned sectional sofa and a bespoke marble coffee table. Huge windows frame a panoramic view of a tropical coastline. The lighting is soft and ambient, highlighting the premium natural materials used throughout the space. The aesthetic is curated and high-end." data-src="/media/home_slides/slide_9-1280.webp" data-srcset="/media/home_slides/slide_9-768.webp 768w, /media/home_slides/slide_9-1280.webp 1280w, /media/home_slides/slide_9-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
-<div class=""><img class="w-full h-full object-cover object-center" alt="The resort's main entrance walkway at sunset, lined with tall palm trees and minimalist water features. The sky is a gradient of violet and gold. The path is paved with light-colored stones, leading toward a warm, inviting glow from the lobby. The visual narrative is one of arrival, exclusivity, and serene beauty." data-src="/media/home_slides/slide_10-1280.webp" data-srcset="/media/home_slides/slide_10-768.webp 768w, /media/home_slides/slide_10-1280.webp 1280w, /media/home_slides/slide_10-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
+<div class=""><img class="w-full h-full object-cover object-center" alt="Two guests watching the sunset over the water near The Nyakaju." data-src="/media/home_slides/slide_6-1280.webp" data-srcset="/media/home_slides/slide_6-768.webp 768w, /media/home_slides/slide_6-1280.webp 1280w, /media/home_slides/slide_6-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
+<div class=""><img class="w-full h-full object-cover object-center" alt="A zebra grazing in the green landscape near The Nyakaju." data-src="/media/home_slides/slide_7-1280.webp" data-srcset="/media/home_slides/slide_7-768.webp 768w, /media/home_slides/slide_7-1280.webp 1280w, /media/home_slides/slide_7-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
+<div class=""><img class="w-full h-full object-cover object-center" alt="Guests enjoying a guided quad-bike ride on a countryside trail." data-src="/media/home_slides/slide_8-1280.webp" data-srcset="/media/home_slides/slide_8-768.webp 768w, /media/home_slides/slide_8-1280.webp 1280w, /media/home_slides/slide_8-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
+<div class=""><img class="w-full h-full object-cover object-center" alt="Guests dining outdoors beside Ankole cattle in the countryside." data-src="/media/home_slides/slide_9-1280.webp" data-srcset="/media/home_slides/slide_9-768.webp 768w, /media/home_slides/slide_9-1280.webp 1280w, /media/home_slides/slide_9-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
+<div class=""><img class="w-full h-full object-cover object-center" alt="Guests taking a guided nature walk with binoculars through tall grass." data-src="/media/home_slides/slide_10-1280.webp" data-srcset="/media/home_slides/slide_10-768.webp 768w, /media/home_slides/slide_10-1280.webp 1280w, /media/home_slides/slide_10-1920.webp 1920w" data-sizes="100vw" width="1920" height="1280" decoding="async"></div>
 </div>
 <div class="absolute inset-0 z-20 text-overlay-mask flex flex-col items-center text-center px-6">
 

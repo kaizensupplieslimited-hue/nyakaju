@@ -1,4 +1,4 @@
-import { mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -11,9 +11,49 @@ const sizes = [768, 1280, 1920];
 const quality = 78;
 
 const collections = [
-  { name: "home_slides", matches: /^slide_\d+\.webp$/i },
-  { name: "gallery", matches: /^gallery_\d+\.webp$/i },
-  { name: "room_images", matches: /\.webp$/i },
+  {
+    name: "home_slides",
+    files: [
+      ["The_NyakajuHouse1.jpg", "slide_1"],
+      ["The_NyakajuHouse2.jpg", "slide_2"],
+      ["The_NyakajuHouse3.jpg", "slide_3"],
+      ["SkylineTheNyakaju.jpg", "slide_4"],
+      ["skyview1Thenyakaju.jpg", "slide_5"],
+      ["skyview2Thenyakaju.jpg", "slide_6"],
+      ["Zebra_TheNyakaju.jpg", "slide_7"],
+      ["QuadBiking_TheNyakaju.jpg", "slide_8"],
+      ["Dininginthewild TheNyakaju.jpg", "slide_9"],
+      ["NaturewalkTheNyakaju.jpg", "slide_10"],
+    ],
+  },
+  {
+    name: "gallery",
+    files: [
+      ["TheNyakajuCompound.jpg", "gallery_1"],
+      ["TheNyakajuRoom.jpg", "gallery_2"],
+      ["TheNyakajuSittingRoom.jpg", "gallery_3"],
+      ["Gallery_RoomTheNyakaju.jpg", "gallery_4"],
+      ["ConferenceRoomTheNyakaju.jpg", "gallery_5"],
+      ["CattleSitingTheNyakaju.jpg", "gallery_6"],
+      ["WesternCultureGallery.jpg", "gallery_7"],
+      ["LearnWesternCulture.jpg", "gallery_8"],
+      ["gallery_skylineTheNyakaju.jpg", "gallery_9"],
+    ],
+  },
+  {
+    name: "room_images",
+    files: [
+      ["Deluxe bedeoom2.jpg", "delux_bed"],
+      ["Deluxe Bathroom.jpg", "delux_bathroom"],
+      ["Deluxe bedroom1.jpg", "delux_alt"],
+      ["Royal Bedroom2.jpg", "royal_bed"],
+      ["Royal Bathrrom.jpg", "royal_bathroom"],
+      ["Royal Bedroom1.jpg", "royal_alt"],
+      ["Elite Bedroom.jpg", "elite"],
+      ["Elite Bathrrom1.jpg", "elite_bathroom"],
+      ["Elite Bathrrom2.jpg", "elite_alt"],
+    ],
+  },
 ];
 
 function assertGeneratedOutputPath() {
@@ -27,26 +67,17 @@ function publicUrl(collection, fileName) {
   return `/media/${collection}/${fileName}`;
 }
 
-async function optimizeCollection({ name, matches }) {
+async function optimizeCollection({ name, files }) {
   const sourceDirectory = path.join(sourceRoot, name);
   const outputDirectory = path.join(outputRoot, name);
-  const fileNames = (await readdir(sourceDirectory))
-    .filter((fileName) => matches.test(fileName))
-    .sort((left, right) => left.localeCompare(right, undefined, { numeric: true }));
-
-  if (!fileNames.length) {
-    throw new Error(`No source images found in ${sourceDirectory}`);
-  }
 
   await mkdir(outputDirectory, { recursive: true });
   const entries = {};
 
-  for (const fileName of fileNames) {
+  for (const [fileName, stem] of files) {
     const sourcePath = path.join(sourceDirectory, fileName);
     const sourceBuffer = await readFile(sourcePath);
     const sourceMetadata = await sharp(sourceBuffer).metadata();
-    const extension = path.extname(fileName);
-    const stem = path.basename(fileName, extension);
     const variants = [];
 
     for (const size of sizes) {
@@ -80,7 +111,8 @@ async function optimizeCollection({ name, matches }) {
       });
     }
 
-    entries[`${name}/${fileName}`] = {
+    entries[`${name}/${stem}.webp`] = {
+      source: fileName,
       sourceWidth: sourceMetadata.width,
       sourceHeight: sourceMetadata.height,
       variants,
@@ -91,8 +123,11 @@ async function optimizeCollection({ name, matches }) {
 }
 
 assertGeneratedOutputPath();
-await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputRoot, { recursive: true });
+for (const collection of collections) {
+  await rm(path.join(outputRoot, collection.name), { recursive: true, force: true });
+}
+await rm(manifestPath, { force: true });
 
 const manifest = {
   generatedAt: new Date().toISOString(),

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T13:09:09.000Z",
+  "generatedAt": "2026-10-12T10:03:12.792Z",
   "format": "webp",
   "quality": 78,
   "sizes": [
@@ -9,674 +9,702 @@
   ],
   "images": {
     "home_slides/slide_1.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "The_NyakajuHouse1.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_1-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 13954
+          "height": 573,
+          "bytes": 80528
         },
         {
           "url": "/media/home_slides/slide_1-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 33786
+          "height": 956,
+          "bytes": 212884
         },
         {
           "url": "/media/home_slides/slide_1-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 67920
+          "height": 1434,
+          "bytes": 454130
         }
       ]
     },
     "home_slides/slide_2.webp": {
-      "sourceWidth": 4320,
-      "sourceHeight": 2880,
+      "source": "The_NyakajuHouse2.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_2-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 14282
+          "height": 573,
+          "bytes": 99300
         },
         {
           "url": "/media/home_slides/slide_2-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 28734
+          "height": 956,
+          "bytes": 260114
         },
         {
           "url": "/media/home_slides/slide_2-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 50434
+          "height": 1434,
+          "bytes": 544892
         }
       ]
     },
     "home_slides/slide_3.webp": {
-      "sourceWidth": 4627,
-      "sourceHeight": 3085,
+      "source": "The_NyakajuHouse3.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_3-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 31820
+          "height": 573,
+          "bytes": 67850
         },
         {
           "url": "/media/home_slides/slide_3-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 73326
+          "height": 956,
+          "bytes": 176702
         },
         {
           "url": "/media/home_slides/slide_3-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 133040
+          "height": 1434,
+          "bytes": 363826
         }
       ]
     },
     "home_slides/slide_4.webp": {
-      "sourceWidth": 4364,
-      "sourceHeight": 2909,
+      "source": "SkylineTheNyakaju.jpg",
+      "sourceWidth": 5472,
+      "sourceHeight": 3648,
       "variants": [
         {
           "url": "/media/home_slides/slide_4-768.webp",
           "width": 768,
           "height": 512,
-          "bytes": 40512
+          "bytes": 13186
         },
         {
           "url": "/media/home_slides/slide_4-1280.webp",
           "width": 1280,
           "height": 853,
-          "bytes": 85316
+          "bytes": 32658
         },
         {
           "url": "/media/home_slides/slide_4-1920.webp",
           "width": 1920,
           "height": 1280,
-          "bytes": 150318
+          "bytes": 68862
         }
       ]
     },
     "home_slides/slide_5.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "skyview1Thenyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_5-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 19140
+          "height": 573,
+          "bytes": 29722
         },
         {
           "url": "/media/home_slides/slide_5-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 37994
+          "height": 956,
+          "bytes": 71104
         },
         {
           "url": "/media/home_slides/slide_5-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 64614
+          "height": 1434,
+          "bytes": 150018
         }
       ]
     },
     "home_slides/slide_6.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "skyview2Thenyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_6-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 72602
+          "height": 573,
+          "bytes": 16330
         },
         {
           "url": "/media/home_slides/slide_6-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 187450
+          "height": 956,
+          "bytes": 32538
         },
         {
           "url": "/media/home_slides/slide_6-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 381598
+          "height": 1434,
+          "bytes": 57216
         }
       ]
     },
     "home_slides/slide_7.webp": {
-      "sourceWidth": 4957,
-      "sourceHeight": 3305,
+      "source": "Zebra_TheNyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_7-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 61600
+          "height": 573,
+          "bytes": 23566
         },
         {
           "url": "/media/home_slides/slide_7-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 157960
+          "height": 956,
+          "bytes": 48184
         },
         {
           "url": "/media/home_slides/slide_7-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 310178
+          "height": 1434,
+          "bytes": 84660
         }
       ]
     },
     "home_slides/slide_8.webp": {
-      "sourceWidth": 4764,
-      "sourceHeight": 3176,
+      "source": "QuadBiking_TheNyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_8-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 89310
+          "height": 573,
+          "bytes": 61318
         },
         {
           "url": "/media/home_slides/slide_8-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 235944
+          "height": 956,
+          "bytes": 123952
         },
         {
           "url": "/media/home_slides/slide_8-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 475424
+          "height": 1434,
+          "bytes": 212130
         }
       ]
     },
     "home_slides/slide_9.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "Dininginthewild TheNyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_9-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 12900
+          "height": 573,
+          "bytes": 58974
         },
         {
           "url": "/media/home_slides/slide_9-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 31786
+          "height": 956,
+          "bytes": 122100
         },
         {
           "url": "/media/home_slides/slide_9-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 65908
+          "height": 1434,
+          "bytes": 214806
         }
       ]
     },
     "home_slides/slide_10.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "NaturewalkTheNyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/home_slides/slide_10-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 44426
+          "height": 573,
+          "bytes": 41908
         },
         {
           "url": "/media/home_slides/slide_10-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 90010
+          "height": 956,
+          "bytes": 96408
         },
         {
           "url": "/media/home_slides/slide_10-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 160918
+          "height": 1434,
+          "bytes": 187568
         }
       ]
     },
     "gallery/gallery_1.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "TheNyakajuCompound.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_1-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 26784
+          "height": 573,
+          "bytes": 87498
         },
         {
           "url": "/media/gallery/gallery_1-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 66596
+          "height": 956,
+          "bytes": 240068
         },
         {
           "url": "/media/gallery/gallery_1-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 132570
+          "height": 1434,
+          "bytes": 532630
         }
       ]
     },
     "gallery/gallery_2.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "TheNyakajuRoom.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_2-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 19324
+          "height": 573,
+          "bytes": 42006
         },
         {
           "url": "/media/gallery/gallery_2-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 46106
+          "height": 956,
+          "bytes": 97394
         },
         {
           "url": "/media/gallery/gallery_2-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 88482
+          "height": 1434,
+          "bytes": 183814
         }
       ]
     },
     "gallery/gallery_3.webp": {
-      "sourceWidth": 4975,
-      "sourceHeight": 3317,
+      "source": "TheNyakajuSittingRoom.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_3-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 26736
+          "height": 573,
+          "bytes": 34432
         },
         {
           "url": "/media/gallery/gallery_3-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 59110
+          "height": 956,
+          "bytes": 82994
         },
         {
           "url": "/media/gallery/gallery_3-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 115338
+          "height": 1434,
+          "bytes": 163702
         }
       ]
     },
     "gallery/gallery_4.webp": {
-      "sourceWidth": 5191,
-      "sourceHeight": 3461,
+      "source": "Gallery_RoomTheNyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_4-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 19858
+          "height": 573,
+          "bytes": 35762
         },
         {
           "url": "/media/gallery/gallery_4-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 48884
+          "height": 956,
+          "bytes": 84128
         },
         {
           "url": "/media/gallery/gallery_4-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 124128
+          "height": 1434,
+          "bytes": 193322
         }
       ]
     },
     "gallery/gallery_5.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "ConferenceRoomTheNyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_5-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 30526
+          "height": 573,
+          "bytes": 45692
         },
         {
           "url": "/media/gallery/gallery_5-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 67144
+          "height": 956,
+          "bytes": 98280
         },
         {
           "url": "/media/gallery/gallery_5-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 120268
+          "height": 1434,
+          "bytes": 178816
         }
       ]
     },
     "gallery/gallery_6.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "CattleSitingTheNyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_6-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 75976
+          "height": 573,
+          "bytes": 56292
         },
         {
           "url": "/media/gallery/gallery_6-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 198026
+          "height": 956,
+          "bytes": 140182
         },
         {
           "url": "/media/gallery/gallery_6-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 408394
+          "height": 1434,
+          "bytes": 300396
         }
       ]
     },
     "gallery/gallery_7.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "WesternCultureGallery.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_7-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 30052
+          "height": 573,
+          "bytes": 28154
         },
         {
           "url": "/media/gallery/gallery_7-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 68514
+          "height": 956,
+          "bytes": 65058
         },
         {
           "url": "/media/gallery/gallery_7-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 128982
+          "height": 1434,
+          "bytes": 139644
         }
       ]
     },
     "gallery/gallery_8.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "LearnWesternCulture.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_8-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 44196
+          "height": 573,
+          "bytes": 36934
         },
         {
           "url": "/media/gallery/gallery_8-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 95488
+          "height": 956,
+          "bytes": 86180
         },
         {
           "url": "/media/gallery/gallery_8-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 177700
+          "height": 1434,
+          "bytes": 177496
         }
       ]
     },
     "gallery/gallery_9.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "gallery_skylineTheNyakaju.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/gallery/gallery_9-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 38832
+          "height": 573,
+          "bytes": 35100
         },
         {
           "url": "/media/gallery/gallery_9-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 97076
+          "height": 956,
+          "bytes": 87820
         },
         {
           "url": "/media/gallery/gallery_9-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 190528
-        }
-      ]
-    },
-    "room_images/delux_alt.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
-      "variants": [
-        {
-          "url": "/media/room_images/delux_alt-768.webp",
-          "width": 768,
-          "height": 512,
-          "bytes": 24624
-        },
-        {
-          "url": "/media/room_images/delux_alt-1280.webp",
-          "width": 1280,
-          "height": 853,
-          "bytes": 53124
-        },
-        {
-          "url": "/media/room_images/delux_alt-1920.webp",
-          "width": 1920,
-          "height": 1280,
-          "bytes": 103104
-        }
-      ]
-    },
-    "room_images/delux_bathroom.webp": {
-      "sourceWidth": 3648,
-      "sourceHeight": 5472,
-      "variants": [
-        {
-          "url": "/media/room_images/delux_bathroom-768.webp",
-          "width": 512,
-          "height": 768,
-          "bytes": 20874
-        },
-        {
-          "url": "/media/room_images/delux_bathroom-1280.webp",
-          "width": 853,
-          "height": 1280,
-          "bytes": 44870
-        },
-        {
-          "url": "/media/room_images/delux_bathroom-1920.webp",
-          "width": 1280,
-          "height": 1920,
-          "bytes": 84510
+          "height": 1434,
+          "bytes": 185426
         }
       ]
     },
     "room_images/delux_bed.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+      "source": "Deluxe bedeoom2.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
       "variants": [
         {
           "url": "/media/room_images/delux_bed-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 22568
+          "height": 573,
+          "bytes": 30626
         },
         {
           "url": "/media/room_images/delux_bed-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 50102
+          "height": 956,
+          "bytes": 66418
         },
         {
           "url": "/media/room_images/delux_bed-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 94636
+          "height": 1434,
+          "bytes": 120386
         }
       ]
     },
-    "room_images/elite_alt.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
+    "room_images/delux_bathroom.webp": {
+      "source": "Deluxe Bathroom.jpg",
+      "sourceWidth": 1792,
+      "sourceHeight": 2400,
       "variants": [
         {
-          "url": "/media/room_images/elite_alt-768.webp",
+          "url": "/media/room_images/delux_bathroom-768.webp",
+          "width": 573,
+          "height": 768,
+          "bytes": 31456
+        },
+        {
+          "url": "/media/room_images/delux_bathroom-1280.webp",
+          "width": 956,
+          "height": 1280,
+          "bytes": 70590
+        },
+        {
+          "url": "/media/room_images/delux_bathroom-1920.webp",
+          "width": 1434,
+          "height": 1920,
+          "bytes": 129418
+        }
+      ]
+    },
+    "room_images/delux_alt.webp": {
+      "source": "Deluxe bedroom1.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
+      "variants": [
+        {
+          "url": "/media/room_images/delux_alt-768.webp",
           "width": 768,
-          "height": 512,
-          "bytes": 31740
+          "height": 573,
+          "bytes": 36128
         },
         {
-          "url": "/media/room_images/elite_alt-1280.webp",
+          "url": "/media/room_images/delux_alt-1280.webp",
           "width": 1280,
-          "height": 853,
-          "bytes": 76444
+          "height": 956,
+          "bytes": 81526
         },
         {
-          "url": "/media/room_images/elite_alt-1920.webp",
+          "url": "/media/room_images/delux_alt-1920.webp",
           "width": 1920,
-          "height": 1280,
-          "bytes": 150532
-        }
-      ]
-    },
-    "room_images/elite_bathroom.webp": {
-      "sourceWidth": 3648,
-      "sourceHeight": 5472,
-      "variants": [
-        {
-          "url": "/media/room_images/elite_bathroom-768.webp",
-          "width": 512,
-          "height": 768,
-          "bytes": 18346
-        },
-        {
-          "url": "/media/room_images/elite_bathroom-1280.webp",
-          "width": 853,
-          "height": 1280,
-          "bytes": 41158
-        },
-        {
-          "url": "/media/room_images/elite_bathroom-1920.webp",
-          "width": 1280,
-          "height": 1920,
-          "bytes": 78650
-        }
-      ]
-    },
-    "room_images/elite.webp": {
-      "sourceWidth": 3648,
-      "sourceHeight": 5472,
-      "variants": [
-        {
-          "url": "/media/room_images/elite-768.webp",
-          "width": 512,
-          "height": 768,
-          "bytes": 13022
-        },
-        {
-          "url": "/media/room_images/elite-1280.webp",
-          "width": 853,
-          "height": 1280,
-          "bytes": 27882
-        },
-        {
-          "url": "/media/room_images/elite-1920.webp",
-          "width": 1280,
-          "height": 1920,
-          "bytes": 48702
-        }
-      ]
-    },
-    "room_images/royal_alt.webp": {
-      "sourceWidth": 5472,
-      "sourceHeight": 3648,
-      "variants": [
-        {
-          "url": "/media/room_images/royal_alt-768.webp",
-          "width": 768,
-          "height": 512,
-          "bytes": 23534
-        },
-        {
-          "url": "/media/room_images/royal_alt-1280.webp",
-          "width": 1280,
-          "height": 853,
-          "bytes": 48408
-        },
-        {
-          "url": "/media/room_images/royal_alt-1920.webp",
-          "width": 1920,
-          "height": 1280,
-          "bytes": 86668
-        }
-      ]
-    },
-    "room_images/royal_bathroom.webp": {
-      "sourceWidth": 3648,
-      "sourceHeight": 5472,
-      "variants": [
-        {
-          "url": "/media/room_images/royal_bathroom-768.webp",
-          "width": 512,
-          "height": 768,
-          "bytes": 14858
-        },
-        {
-          "url": "/media/room_images/royal_bathroom-1280.webp",
-          "width": 853,
-          "height": 1280,
-          "bytes": 29702
-        },
-        {
-          "url": "/media/room_images/royal_bathroom-1920.webp",
-          "width": 1280,
-          "height": 1920,
-          "bytes": 50484
+          "height": 1434,
+          "bytes": 153726
         }
       ]
     },
     "room_images/royal_bed.webp": {
-      "sourceWidth": 3648,
-      "sourceHeight": 5472,
+      "source": "Royal Bedroom2.jpg",
+      "sourceWidth": 1792,
+      "sourceHeight": 2400,
       "variants": [
         {
           "url": "/media/room_images/royal_bed-768.webp",
-          "width": 512,
+          "width": 573,
           "height": 768,
-          "bytes": 22770
+          "bytes": 32316
         },
         {
           "url": "/media/room_images/royal_bed-1280.webp",
-          "width": 853,
+          "width": 956,
           "height": 1280,
-          "bytes": 49464
+          "bytes": 70696
         },
         {
           "url": "/media/room_images/royal_bed-1920.webp",
-          "width": 1280,
+          "width": 1434,
           "height": 1920,
-          "bytes": 93592
+          "bytes": 124916
+        }
+      ]
+    },
+    "room_images/royal_bathroom.webp": {
+      "source": "Royal Bathrrom.jpg",
+      "sourceWidth": 1792,
+      "sourceHeight": 2400,
+      "variants": [
+        {
+          "url": "/media/room_images/royal_bathroom-768.webp",
+          "width": 573,
+          "height": 768,
+          "bytes": 27670
+        },
+        {
+          "url": "/media/room_images/royal_bathroom-1280.webp",
+          "width": 956,
+          "height": 1280,
+          "bytes": 57578
+        },
+        {
+          "url": "/media/room_images/royal_bathroom-1920.webp",
+          "width": 1434,
+          "height": 1920,
+          "bytes": 119384
+        }
+      ]
+    },
+    "room_images/royal_alt.webp": {
+      "source": "Royal Bedroom1.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
+      "variants": [
+        {
+          "url": "/media/room_images/royal_alt-768.webp",
+          "width": 768,
+          "height": 573,
+          "bytes": 30752
+        },
+        {
+          "url": "/media/room_images/royal_alt-1280.webp",
+          "width": 1280,
+          "height": 956,
+          "bytes": 66110
+        },
+        {
+          "url": "/media/room_images/royal_alt-1920.webp",
+          "width": 1920,
+          "height": 1434,
+          "bytes": 115960
+        }
+      ]
+    },
+    "room_images/elite.webp": {
+      "source": "Elite Bedroom.jpg",
+      "sourceWidth": 2400,
+      "sourceHeight": 1792,
+      "variants": [
+        {
+          "url": "/media/room_images/elite-768.webp",
+          "width": 768,
+          "height": 573,
+          "bytes": 46444
+        },
+        {
+          "url": "/media/room_images/elite-1280.webp",
+          "width": 1280,
+          "height": 956,
+          "bytes": 113952
+        },
+        {
+          "url": "/media/room_images/elite-1920.webp",
+          "width": 1920,
+          "height": 1434,
+          "bytes": 224590
+        }
+      ]
+    },
+    "room_images/elite_bathroom.webp": {
+      "source": "Elite Bathrrom1.jpg",
+      "sourceWidth": 1792,
+      "sourceHeight": 2400,
+      "variants": [
+        {
+          "url": "/media/room_images/elite_bathroom-768.webp",
+          "width": 573,
+          "height": 768,
+          "bytes": 23142
+        },
+        {
+          "url": "/media/room_images/elite_bathroom-1280.webp",
+          "width": 956,
+          "height": 1280,
+          "bytes": 48522
+        },
+        {
+          "url": "/media/room_images/elite_bathroom-1920.webp",
+          "width": 1434,
+          "height": 1920,
+          "bytes": 96378
+        }
+      ]
+    },
+    "room_images/elite_alt.webp": {
+      "source": "Elite Bathrrom2.jpg",
+      "sourceWidth": 1792,
+      "sourceHeight": 2400,
+      "variants": [
+        {
+          "url": "/media/room_images/elite_alt-768.webp",
+          "width": 573,
+          "height": 768,
+          "bytes": 27724
+        },
+        {
+          "url": "/media/room_images/elite_alt-1280.webp",
+          "width": 956,
+          "height": 1280,
+          "bytes": 61728
+        },
+        {
+          "url": "/media/room_images/elite_alt-1920.webp",
+          "width": 1434,
+          "height": 1920,
+          "bytes": 119664
         }
       ]
     }

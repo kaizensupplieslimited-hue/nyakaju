@@ -989,15 +989,15 @@ function setupGalleryPage(): Cleanup[] {
     const images = Array.from(carousel.querySelectorAll<HTMLImageElement>("[data-gallery-image]"));
     const counters = Array.from(carousel.querySelectorAll<HTMLElement>("[data-gallery-counter]"));
     const slides = [
-      { alt: "A serene wide-angle shot of a luxury resort infinity pool seamlessly blending into a calm, glassy lake at dawn.", number: 1 },
-      { alt: "A modern resort suite with natural wood accents and warm morning light.", number: 2 },
-      { alt: "The resort's main architectural structure glowing warmly at twilight.", number: 3 },
-      { alt: "An elegant outdoor dining table for two overlooking a misty valley.", number: 4 },
-      { alt: "Natural stone, polished concrete, and warm timber in a resort architectural detail.", number: 5 },
-      { alt: "A tranquil spa treatment room with soft light and a view of a Zen garden.", number: 6 },
-      { alt: "A secluded stepping-stone path winding through lush tropical gardens.", number: 7 },
-      { alt: "A freestanding stone bathtub overlooking a private resort courtyard.", number: 8 },
-      { alt: "The landscape surrounding the resort glowing at golden hour.", number: 9 },
+      { alt: "The landscaped compound and tree-lined driveway at The Nyakaju.", number: 1 },
+      { alt: "A refined sitting area at The Nyakaju with comfortable chairs and cultural decor.", number: 2 },
+      { alt: "The Nyakaju dining and sitting room with a table prepared for guests.", number: 3 },
+      { alt: "The cultural gallery room at The Nyakaju with traditional decor and seating.", number: 4 },
+      { alt: "The Nyakaju conference room arranged with rows of seats.", number: 5 },
+      { alt: "Ankole cattle grazing across the green landscape near The Nyakaju.", number: 6 },
+      { alt: "Traditional western Ugandan milk gourds and cultural objects on display.", number: 7 },
+      { alt: "The warmly lit cultural gallery where guests can learn about western Ugandan traditions.", number: 8 },
+      { alt: "A golden sunset over the water and rolling landscape near The Nyakaju.", number: 9 },
     ];
     let activeIndex = 0;
 

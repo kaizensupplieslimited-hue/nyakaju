@@ -664,7 +664,7 @@ html.reveal-enhanced .reveal-right:not(.reveal-visible) {
   }
 
   #homeDateTrigger .booking-picker__calendar-icon {
-    transform: translateY(0.55rem);
+    transform: none;
   }
 
   .booking-popover,
@@ -728,6 +728,7 @@ html.reveal-enhanced .reveal-right:not(.reveal-visible) {
     right: 1rem;
     left: 1rem;
     width: auto;
+    bottom: max(1rem, env(safe-area-inset-bottom));
     overflow: visible;
     translate: none;
     transform: none;
@@ -747,6 +748,12 @@ html.reveal-enhanced .reveal-right:not(.reveal-visible) {
 }
 
 @media (max-width: 380px), (max-height: 600px) {
+  #hero-bar {
+    right: 0.75rem;
+    left: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
   .booking-popover__header {
     gap: 0.5rem;
     margin-bottom: 0.75rem;

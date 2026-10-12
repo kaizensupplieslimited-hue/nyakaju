@@ -18,19 +18,19 @@ const supabase = createClient(supabaseUrl, secretKey, {
 
 const roomAssets = {
   deluxe: [
-    ["delux_bed.webp", "Deluxe room bedroom", true],
-    ["delux_bathroom.webp", "Deluxe room bathroom", false],
-    ["delux_alt.webp", "Deluxe room interior", false],
+    ["delux_bed.webp", "Deluxe double-bed room at The Nyakaju", true],
+    ["delux_bathroom.webp", "Deluxe tiled bathroom with an enclosed shower", false],
+    ["delux_alt.webp", "Deluxe single-bed room at The Nyakaju", false],
   ],
   royal: [
-    ["royal_bed.webp", "Royal room bedroom", true],
-    ["royal_bathroom.webp", "Royal room bathroom", false],
-    ["royal_alt.webp", "Royal room interior", false],
+    ["royal_bed.webp", "Royal bedroom with purple walls and natural light", true],
+    ["royal_bathroom.webp", "Royal tiled bathroom with a walk-in shower", false],
+    ["royal_alt.webp", "Royal bedroom with floral curtains", false],
   ],
   elite: [
-    ["elite.webp", "Elite room bedroom", true],
-    ["elite_bathroom.webp", "Elite room bathroom", false],
-    ["elite_alt.webp", "Elite room interior", false],
+    ["elite.webp", "Elite spacious bedroom and sitting area", true],
+    ["elite_bathroom.webp", "Elite bathroom with an enclosed shower", false],
+    ["elite_alt.webp", "Elite bathroom vanity and shower area", false],
   ],
 };
 
