@@ -152,7 +152,7 @@ function renderHomepageRooms(rooms: PublicRoom[]): Cleanup[] {
           </div>
           <p class="font-body-md text-body-md ${availabilityClass} mb-10">${escapeHtml(availabilityLabel)}</p>
           <div class="flex flex-wrap gap-4">
-            ${room.availableUnits > 0 ? `<a href="${bookingHref(room)}" class="inline-flex items-center justify-center rounded-full bg-black px-7 py-4 font-label-lg text-label-lg uppercase tracking-[0.14em] text-white transition-colors hover:bg-primary">Book room</a>` : ""}
+            ${room.availableUnits > 0 ? `<a id="home-book-room-${escapeHtml(room.slug)}" data-room-slug="${escapeHtml(room.slug)}" data-booking-source="homepage" href="${bookingHref(room)}" class="room-book-button home-room-book-button room-book-button--${escapeHtml(room.slug)} inline-flex items-center justify-center rounded-full bg-black px-7 py-4 font-label-lg text-label-lg uppercase tracking-[0.14em] text-white transition-colors hover:bg-primary">Book room</a>` : ""}
           </div>
         </div>
         <div class="order-1 lg:order-2 lg:col-span-7">
@@ -1160,7 +1160,7 @@ function setupRoomsPage(): Cleanup[] {
             <p class="font-label-lg ${soldOut ? "text-error" : "text-green-700"}">${soldOut ? `Only ${room.availableUnits} room${room.availableUnits === 1 ? " is" : "s are"} available; you selected ${requestedRooms}` : `${room.availableUnits} of ${room.totalUnits} available`}</p>
             ${soldOut
               ? '<span class="inline-flex rounded-full px-5 py-3 bg-surface-container text-on-surface-variant">Not enough rooms for this party</span>'
-              : `<a href="${bookingHref(room, arrival, departure, adults, children, requestedRooms)}" class="group font-label-sm text-label-sm uppercase tracking-[0.16em] text-on-primary bg-black rounded-full px-5 py-3 hover:bg-primary transition-all flex items-center w-fit">Book ${requestedRooms > 1 ? `${requestedRooms} rooms` : "room"}</a>`}
+              : `<a id="rooms-page-book-room-${escapeHtml(room.slug)}" data-room-slug="${escapeHtml(room.slug)}" data-booking-source="rooms-page" href="${bookingHref(room, arrival, departure, adults, children, requestedRooms)}" class="room-book-button rooms-page-room-book-button room-book-button--${escapeHtml(room.slug)} group font-label-sm text-label-sm uppercase tracking-[0.16em] text-on-primary bg-black rounded-full px-5 py-3 hover:bg-primary transition-all flex items-center w-fit">Book ${requestedRooms > 1 ? `${requestedRooms} rooms` : "room"}</a>`}
           </div>
           <div class="order-1 lg:order-2 lg:col-span-7" data-room-gallery="${room.id}">
             <div class="relative h-[320px] sm:h-[460px] lg:h-[500px] w-full overflow-hidden rounded-xl bg-surface-container shadow-sm">
