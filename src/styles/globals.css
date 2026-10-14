@@ -725,11 +725,11 @@ html.reveal-enhanced .reveal-right:not(.reveal-visible) {
   }
 
   #hero-bar {
-    right: 1rem;
-    left: 1rem;
-    width: auto;
+    right: auto;
+    left: 50vw;
+    width: calc(100vw - 2rem);
     overflow: visible;
-    translate: none;
+    translate: -50% 0;
     transform: none;
   }
 
