@@ -1270,6 +1270,7 @@ function setupCompleteBookingPage(): Cleanup[] {
     minimumRoomCount,
     Number.parseInt(searchParams.get("rooms") ?? "", 10) || minimumRoomCount,
   );
+  let roomCountOptionsInitialized = false;
   let latestAvailableUnits: number | null = null;
   let isCheckingAvailability = false;
   adultsCountInput.value = String(adults);
@@ -1337,10 +1338,10 @@ function setupCompleteBookingPage(): Cleanup[] {
 
   const setRoomCountOptions = (availableUnits: number) => {
     latestAvailableUnits = availableUnits;
-    const previousValue = Math.max(
-      preferredRoomCount,
-      Number.parseInt(roomCountInput.value, 10) || minimumRoomCount,
-    );
+    const currentValue = Number.parseInt(roomCountInput.value, 10);
+    const requestedValue = roomCountOptionsInitialized
+      ? currentValue || minimumRoomCount
+      : preferredRoomCount;
     const maximum = Math.max(0, availableUnits);
     const hasEnoughRooms = maximum >= minimumRoomCount;
     roomCountInput.innerHTML = hasEnoughRooms
@@ -1351,11 +1352,12 @@ function setupCompleteBookingPage(): Cleanup[] {
       : '<option value="">Not enough rooms available</option>';
     roomCountInput.disabled = !hasEnoughRooms;
     if (hasEnoughRooms) {
-      roomCountInput.value = String(Math.max(minimumRoomCount, Math.min(previousValue, maximum)));
+      roomCountInput.value = String(Math.max(minimumRoomCount, Math.min(requestedValue, maximum)));
       preferredRoomCount = Number.parseInt(roomCountInput.value, 10);
       searchParams.set("rooms", roomCountInput.value);
       window.history.replaceState(null, "", `${window.location.pathname}?${searchParams.toString()}`);
     }
+    roomCountOptionsInitialized = true;
     roomCountHelp.textContent = hasEnoughRooms
       ? `${maximum} room${maximum === 1 ? "" : "s"} available for these dates. Your party requires at least ${minimumRoomCount}.`
       : `Only ${maximum} room${maximum === 1 ? " is" : "s are"} available, but your party requires at least ${minimumRoomCount}.`;
