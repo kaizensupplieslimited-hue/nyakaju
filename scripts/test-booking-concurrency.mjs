@@ -26,6 +26,8 @@ function bookingArgs(arrival, departure, suffix, roomCount = 2) {
     p_arrival_date: arrival,
     p_departure_date: departure,
     p_room_count: roomCount,
+    p_adults_count: roomCount,
+    p_children_count: 0,
   };
 }
 

@@ -52,6 +52,8 @@ try {
     p_arrival_date: "2030-01-01",
     p_departure_date: "2030-01-02",
     p_room_count: 1,
+    p_adults_count: 1,
+    p_children_count: 0,
   });
   assert(Boolean(anonymousRpc.error), "Anonymous callers must not execute the booking function directly.");
 

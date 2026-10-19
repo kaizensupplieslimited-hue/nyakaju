@@ -1550,6 +1550,7 @@ function setupCompleteBookingPage(): Cleanup[] {
         status: string;
         totalAmount: number;
         currency: string;
+        receiptDelivery: "sent" | "failed" | "not_configured";
       }>("/api/bookings", {
         method: "POST",
         body: JSON.stringify({
@@ -1559,6 +1560,8 @@ function setupCompleteBookingPage(): Cleanup[] {
           lastName: (document.getElementById("lastName") as HTMLInputElement).value,
           email: (document.getElementById("email") as HTMLInputElement).value,
           phone: (document.getElementById("phone") as HTMLInputElement).value,
+          adults: adultsCountInput.value,
+          children: childrenCountInput.value,
           arrival: arrivalDate,
           departure: departureDate,
         }),
@@ -1566,10 +1569,15 @@ function setupCompleteBookingPage(): Cleanup[] {
 
       const confirmation = document.createElement("div");
       confirmation.className = "mb-8 rounded-xl bg-primary-container p-6 text-on-primary-container";
+      const receiptMessage = result.receiptDelivery === "sent"
+        ? "A receipt has been sent to the email address you entered."
+        : result.receiptDelivery === "not_configured"
+          ? "Email receipts are not available yet, so please save this confirmation code."
+          : "We could not send the email receipt. Your request is saved, so please keep this confirmation code.";
       confirmation.innerHTML = `
         <p class="mb-3 inline-flex rounded-full bg-primary px-3 py-1.5 text-[0.625rem] font-semibold leading-4 uppercase tracking-widest text-white">Booking request received</p>
         <p class="font-headline-md font-medium text-[1.125rem] leading-[1.625rem] mb-2">${escapeHtml(result.confirmationCode)}</p>
-        <p>Keep this confirmation code. Your request is pending administrator review.</p>
+        <p>Your request is pending administrator review. ${escapeHtml(receiptMessage)}</p>
       `;
       bookingForm.before(confirmation);
       bookingForm.classList.add("hidden");

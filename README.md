@@ -29,6 +29,26 @@ Remove-Item Env:NYAKAJU_ADMIN_PASSWORD
 
 The setup command also assigns the protected `admin` role in Supabase app metadata.
 
+## Booking receipt email
+
+Booking requests are saved even when email delivery is not configured or the provider is temporarily unavailable. To enable pending booking-request receipts, add these server-only environment variables locally and in the deployment environment:
+
+```dotenv
+RESEND_API_KEY=re_...
+BOOKING_EMAIL_FROM=The Nyakaju <bookings@your-verified-domain.example>
+BOOKING_EMAIL_REPLY_TO=info@your-domain.example
+```
+
+`BOOKING_EMAIL_REPLY_TO` is optional. `BOOKING_EMAIL_FROM` must use a sender identity verified in Resend. The receipt is always sent to the normalized email address entered by the guest; there is no fixed recipient address.
+
+Apply the latest Supabase migration before deploying the application changes:
+
+```bash
+npx supabase db push
+```
+
+If a booking was created before the sender was configured, an authenticated administrator can open that booking in **Admin → Bookings** and choose **Send receipt**. Failed deliveries can be retried from the same panel.
+
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
 [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.

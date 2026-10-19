@@ -18,10 +18,16 @@ type Booking = {
   status: string;
   nightly_rate: number;
   room_count: number;
+  adults_count: number;
+  children_count: number;
   total_amount: number;
   currency: string;
   admin_notes: string | null;
   confirmed_at: string | null;
+  receipt_email_status: "sent" | "failed" | "not_configured";
+  receipt_email_provider_id: string | null;
+  receipt_email_sent_at: string | null;
+  receipt_email_last_error: string | null;
   created_at: string;
   updated_at: string;
   room_types: { name: string; slug: string } | null;
@@ -79,6 +85,8 @@ export function AdminBookings() {
   const [checkingAvailability, setCheckingAvailability] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [retryingReceipt, setRetryingReceipt] = useState(false);
+  const [receiptNotice, setReceiptNotice] = useState("");
   const [error, setError] = useState("");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const deepLinkedBookingHandled = useRef(false);
@@ -243,6 +251,25 @@ export function AdminBookings() {
     }
   }
 
+  async function retryReceipt(booking: Booking) {
+    setRetryingReceipt(true);
+    setReceiptNotice("");
+    setError("");
+    try {
+      const payload = await requestJson<{ booking: Booking; message: string }>(
+        `/api/admin/bookings/${booking.id}/receipt`,
+        { method: "POST" },
+      );
+      setBookings((items) => items.map((item) => item.id === booking.id ? payload.booking : item));
+      setSelected(payload.booking);
+      setReceiptNotice(payload.message);
+    } catch (caught) {
+      setError((caught as Error).message);
+    } finally {
+      setRetryingReceipt(false);
+    }
+  }
+
   async function createBooking(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -264,6 +291,8 @@ export function AdminBookings() {
           roomCount: formData.get("roomCount"),
           arrival: formData.get("arrival"),
           departure: formData.get("departure"),
+          adults: formData.get("adults"),
+          children: formData.get("children"),
         }),
       });
       form.reset();
@@ -350,12 +379,12 @@ export function AdminBookings() {
               <tbody>
                 {filtered.map((booking) => <tr key={booking.id}>
                   <td><strong>{booking.guest_first_name} {booking.guest_last_name}</strong><span>{booking.guest_email}</span><span>{booking.guest_phone}</span></td>
-                  <td><strong>{booking.room_types?.name ?? "Unknown room"}</strong><span>{booking.room_count} room{booking.room_count === 1 ? "" : "s"} · {booking.confirmation_code}</span></td>
+                  <td><strong>{booking.room_types?.name ?? "Unknown room"}</strong><span>{booking.room_count} room{booking.room_count === 1 ? "" : "s"} · {booking.adults_count} adult{booking.adults_count === 1 ? "" : "s"}, {booking.children_count} children · {booking.confirmation_code}</span></td>
                   <td><strong>{date(booking.arrival_date)} – {date(booking.departure_date)}</strong><span>{nights(booking)} night{nights(booking) === 1 ? "" : "s"}</span></td>
                   <td><strong>{money(booking.total_amount, booking.currency)}</strong><span>{money(booking.nightly_rate, booking.currency)} per night</span></td>
                   <td><select className={`${styles.status} booking-status`} data-status={booking.status} value={booking.status} disabled={saving || getManualBookingStatusOptions(booking.status).length < 2} onChange={(event) => void updateBooking(booking, event.target.value)} aria-label={`Status for ${booking.confirmation_code}`}>{getManualBookingStatusOptions(booking.status).map((item) => <option key={item} value={item}>{item[0].toUpperCase() + item.slice(1)}</option>)}</select></td>
                   <td><strong>Booked {dateTime(booking.created_at)}</strong><span>{booking.confirmed_at ? `Confirmed ${dateTime(booking.confirmed_at)}` : "Not yet confirmed"}</span></td>
-                  <td><button className={styles.viewButton} onClick={() => setSelected(booking)}>View details</button></td>
+                  <td><button className={styles.viewButton} onClick={() => { setReceiptNotice(""); setSelected(booking); }}>View details</button></td>
                 </tr>)}
               </tbody>
             </table>
@@ -381,22 +410,30 @@ export function AdminBookings() {
           <label><span>Arrival</span><input name="arrival" type="date" min={new Date().toLocaleDateString("en-CA")} value={createArrival} onChange={(event) => { const value = event.target.value; setCreateArrival(value); setCreateAvailableUnits(null); void checkCreateAvailability(createRoomId, value, createDeparture); }} required/></label>
           <label><span>Departure</span><input name="departure" type="date" min={new Date().toLocaleDateString("en-CA")} value={createDeparture} onChange={(event) => { const value = event.target.value; setCreateDeparture(value); setCreateAvailableUnits(null); void checkCreateAvailability(createRoomId, createArrival, value); }} required/></label>
           <label><span>Number of rooms</span><input name="roomCount" type="number" min="1" max={Math.max(1, createRoomLimit)} step="1" value={createRoomCount} disabled={!createRoomId || createRoomLimit === 0 || checkingAvailability} onChange={(event) => setCreateRoomCount(Math.min(Math.max(1, Number(event.target.value)), Math.max(1, createRoomLimit)))} required/><small className={styles.availabilityHelp}>{checkingAvailability ? "Checking live availability…" : createAvailableUnits !== null ? `${createAvailableUnits} room${createAvailableUnits === 1 ? "" : "s"} available for these dates.` : selectedCreateRoom ? `Up to ${selectedCreateRoom.total_units} rooms in this package. Choose dates for live availability.` : "Select a room package first."}</small></label>
+          <label><span>Adults</span><input name="adults" type="number" min="1" max="8" step="1" defaultValue="1" required/></label>
+          <label><span>Children</span><input name="children" type="number" min="0" max="8" step="1" defaultValue="0" required/></label>
           <div className={`${styles.createActions} ${styles.fullField}`}><button type="button" className={styles.cancelCreate} disabled={creating} onClick={closeCreateBooking}>Cancel</button><button type="submit" className={styles.save} disabled={creating || checkingAvailability || rooms.length === 0 || createAvailableUnits === 0}>{creating ? "Creating booking…" : "Create booking"}</button></div>
         </form>
       </section>
     </div> : null}
 
-    {selected ? <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget) setSelected(null); }}>
+    {selected ? <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget && !retryingReceipt) { setReceiptNotice(""); setSelected(null); } }}>
       <section className={styles.drawer} role="dialog" aria-modal="true" aria-labelledby="bookingDetailsTitle">
-        <div className={styles.drawerHeader}><div><p className={styles.eyebrow}>Complete booking record</p><h2 id="bookingDetailsTitle">{selected.guest_first_name} {selected.guest_last_name}</h2></div><button onClick={() => setSelected(null)} aria-label="Close booking details">×</button></div>
+        <div className={styles.drawerHeader}><div><p className={styles.eyebrow}>Complete booking record</p><h2 id="bookingDetailsTitle">{selected.guest_first_name} {selected.guest_last_name}</h2></div><button disabled={retryingReceipt} onClick={() => { setReceiptNotice(""); setSelected(null); }} aria-label="Close booking details">×</button></div>
         <div className={styles.detailGrid}>{[
           ["Confirmation", selected.confirmation_code], ["Room", selected.room_types?.name ?? "Unknown room"],
           ["Number of rooms", String(selected.room_count)],
+          ["Adults", String(selected.adults_count)], ["Children", String(selected.children_count)],
           ["Email", selected.guest_email], ["Phone", selected.guest_phone], ["Arrival", date(selected.arrival_date)],
           ["Departure", date(selected.departure_date)], ["Nightly rate", money(selected.nightly_rate, selected.currency)],
           ["Total", money(selected.total_amount, selected.currency)], ["Booked", dateTime(selected.created_at)],
           ["Confirmed", dateTime(selected.confirmed_at)],
+          ["Receipt delivery", selected.receipt_email_status === "not_configured" ? "Awaiting sender configuration" : selected.receipt_email_status],
+          ["Receipt sent", selected.receipt_email_sent_at ? dateTime(selected.receipt_email_sent_at) : "Not sent"],
         ].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
+        {selected.receipt_email_last_error ? <div className={styles.receiptError} role="alert"><strong>Last delivery error</strong><span>{selected.receipt_email_last_error}</span></div> : null}
+        {receiptNotice ? <div className={styles.receiptNotice} role="status">{receiptNotice}</div> : null}
+        {selected.receipt_email_status !== "sent" ? <button className={styles.secondaryActionFull} disabled={retryingReceipt} onClick={() => void retryReceipt(selected)}>{retryingReceipt ? "Sending receipt…" : selected.receipt_email_status === "failed" ? "Retry receipt" : "Send receipt"}</button> : null}
         <label className={styles.drawerField}><span>Status</span><select className="booking-status" data-status={selected.status} value={selected.status} disabled={getManualBookingStatusOptions(selected.status).length < 2} onChange={(event) => setSelected({ ...selected, status: event.target.value })}>{getManualBookingStatusOptions(selected.status).map((item) => <option key={item} value={item}>{item[0].toUpperCase() + item.slice(1)}</option>)}</select></label>
         <label className={styles.drawerField}><span>Admin notes</span><textarea value={selected.admin_notes ?? ""} placeholder="Add internal notes about this booking" onChange={(event) => setSelected({ ...selected, admin_notes: event.target.value })}/></label>
         <button className={styles.save} disabled={saving} onClick={() => void updateBooking(selected, selected.status, selected.admin_notes ?? "")}>{saving ? "Saving…" : "Save booking changes"}</button>

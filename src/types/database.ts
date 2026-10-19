@@ -16,8 +16,10 @@ export type Database = {
     Tables: {
       bookings: {
         Row: {
+          adults_count: number
           admin_notes: string | null
           arrival_date: string
+          children_count: number
           confirmed_at: string | null
           confirmation_code: string
           created_at: string
@@ -29,6 +31,10 @@ export type Database = {
           guest_phone: string
           id: number
           nightly_rate: number
+          receipt_email_last_error: string | null
+          receipt_email_provider_id: string | null
+          receipt_email_sent_at: string | null
+          receipt_email_status: string
           room_count: number
           room_type_id: number
           status: string
@@ -37,8 +43,10 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          adults_count?: number
           admin_notes?: string | null
           arrival_date: string
+          children_count?: number
           confirmed_at?: string | null
           confirmation_code: string
           created_at?: string
@@ -50,6 +58,10 @@ export type Database = {
           guest_phone: string
           id?: number
           nightly_rate: number
+          receipt_email_last_error?: string | null
+          receipt_email_provider_id?: string | null
+          receipt_email_sent_at?: string | null
+          receipt_email_status?: string
           room_count?: number
           room_type_id: number
           status?: string
@@ -58,8 +70,10 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          adults_count?: number
           admin_notes?: string | null
           arrival_date?: string
+          children_count?: number
           confirmed_at?: string | null
           confirmation_code?: string
           created_at?: string
@@ -71,6 +85,10 @@ export type Database = {
           guest_phone?: string
           id?: number
           nightly_rate?: number
+          receipt_email_last_error?: string | null
+          receipt_email_provider_id?: string | null
+          receipt_email_sent_at?: string | null
+          receipt_email_status?: string
           room_count?: number
           room_type_id?: number
           status?: string
@@ -184,7 +202,9 @@ export type Database = {
     Functions: {
       create_booking_request: {
         Args: {
+          p_adults_count: number
           p_arrival_date: string
+          p_children_count: number
           p_departure_date: string
           p_guest_email: string
           p_guest_first_name: string
@@ -197,6 +217,8 @@ export type Database = {
           booked_nightly_rate: number
           booking_confirmation_code: string
           booking_currency: string
+          booking_id: number
+          booking_room_name: string
           booking_status: string
           booking_total_amount: number
           remaining_units: number

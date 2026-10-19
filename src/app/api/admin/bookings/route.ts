@@ -1,6 +1,7 @@
 import {
   errorResponse,
   isIsoDate,
+  readNonNegativeInteger,
   readNonEmptyString,
   readPositiveInteger,
   todayIsoDate,
@@ -17,6 +18,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const roomTypeId = readPositiveInteger(body.roomTypeId, "Room");
     const roomCount = readPositiveInteger(body.roomCount, "Number of rooms");
+    const adults = readPositiveInteger(body.adults, "Number of adults");
+    const children = readNonNegativeInteger(body.children, "Number of children");
     const firstName = readNonEmptyString(body.firstName, "First name", 100);
     const lastName = readNonEmptyString(body.lastName, "Last name", 100);
     const email = readNonEmptyString(body.email, "Email", 320).toLowerCase();
@@ -29,6 +32,9 @@ export async function POST(request: Request) {
     }
     if (!isIsoDate(arrival) || !isIsoDate(departure) || departure <= arrival || arrival < todayIsoDate()) {
       throw new Error("Choose a valid arrival date and a later departure date.");
+    }
+    if (adults > 8 || children > 8 || adults + children > roomCount * 2) {
+      throw new Error("Choose enough rooms for the party. Each room supports up to two guests.");
     }
 
     const { data: room, error: roomError } = await auth.session.supabase
@@ -86,6 +92,8 @@ export async function POST(request: Request) {
         arrival_date: arrival,
         departure_date: departure,
         room_count: roomCount,
+        adults_count: adults,
+        children_count: children,
         status: "pending",
         nightly_rate: room.nightly_rate,
         total_amount: Number(room.nightly_rate) * nights * roomCount,

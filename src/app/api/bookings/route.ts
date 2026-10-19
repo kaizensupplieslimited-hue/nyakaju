@@ -1,10 +1,12 @@
 import {
   errorResponse,
   isIsoDate,
+  readNonNegativeInteger,
   readNonEmptyString,
   readPositiveInteger,
   todayIsoDate,
 } from "@/lib/api";
+import { sendBookingReceipt } from "@/lib/booking-receipt";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(request: Request) {
@@ -12,6 +14,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const roomTypeId = readPositiveInteger(body.roomTypeId, "Room");
     const roomCount = readPositiveInteger(body.roomCount, "Number of rooms");
+    const adults = readPositiveInteger(body.adults, "Number of adults");
+    const children = readNonNegativeInteger(body.children, "Number of children");
     const firstName = readNonEmptyString(body.firstName, "First name", 100);
     const lastName = readNonEmptyString(body.lastName, "Last name", 100);
     const email = readNonEmptyString(body.email, "Email", 320).toLowerCase();
@@ -21,6 +25,10 @@ export async function POST(request: Request) {
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       throw new Error("Enter a valid email address.");
+    }
+
+    if (adults > 8 || children > 8 || adults + children > roomCount * 2) {
+      throw new Error("Choose enough rooms for your party. Each room supports up to two guests.");
     }
 
     if (
@@ -40,6 +48,8 @@ export async function POST(request: Request) {
       p_guest_email: email,
       p_guest_phone: phone,
       p_arrival_date: arrival,
+      p_adults_count: adults,
+      p_children_count: children,
       p_departure_date: departure,
       p_room_count: roomCount,
     });
@@ -63,6 +73,7 @@ export async function POST(request: Request) {
         error.message.includes("INVALID_STAY_DATES")
         || error.message.includes("INVALID_GUEST_DETAILS")
         || error.message.includes("INVALID_ROOM_COUNT")
+        || error.message.includes("INVALID_OCCUPANCY")
       ) {
         return Response.json(
           { error: "The booking details are invalid." },
@@ -85,6 +96,39 @@ export async function POST(request: Request) {
       );
     }
 
+    const receiptDelivery = await sendBookingReceipt({
+      bookingId: booking.booking_id,
+      confirmationCode: booking.booking_confirmation_code,
+      status: booking.booking_status,
+      guestFirstName: firstName,
+      guestLastName: lastName,
+      guestEmail: email,
+      guestPhone: phone,
+      roomName: booking.booking_room_name,
+      roomCount,
+      adults,
+      children,
+      arrival,
+      departure,
+      nightlyRate: Number(booking.booked_nightly_rate),
+      totalAmount: Number(booking.booking_total_amount),
+      currency: booking.booking_currency,
+    });
+
+    const { error: receiptStatusError } = await supabase
+      .from("bookings")
+      .update({
+        receipt_email_status: receiptDelivery.status,
+        receipt_email_provider_id: receiptDelivery.providerMessageId,
+        receipt_email_sent_at: receiptDelivery.status === "sent" ? new Date().toISOString() : null,
+        receipt_email_last_error: receiptDelivery.error,
+      })
+      .eq("id", booking.booking_id);
+
+    if (receiptStatusError) {
+      console.error("Booking receipt status could not be recorded", receiptStatusError);
+    }
+
     return Response.json(
       {
         confirmationCode: booking.booking_confirmation_code,
@@ -93,6 +137,7 @@ export async function POST(request: Request) {
         totalAmount: booking.booking_total_amount,
         currency: booking.booking_currency,
         remainingUnits: booking.remaining_units,
+        receiptDelivery: receiptDelivery.status,
       },
       { status: 201 },
     );

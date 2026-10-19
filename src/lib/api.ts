@@ -24,6 +24,15 @@ export function readPositiveInteger(value: unknown, field: string) {
   return Number(normalized);
 }
 
+export function readNonNegativeInteger(value: unknown, field: string) {
+  const normalized = typeof value === "string" ? Number(value) : value;
+  if (!Number.isInteger(normalized) || Number(normalized) < 0) {
+    throw new Error(`${field} must be a non-negative whole number.`);
+  }
+
+  return Number(normalized);
+}
+
 export function readPositiveMoney(value: unknown, field: string) {
   const normalized = typeof value === "string" ? Number(value) : value;
   if (

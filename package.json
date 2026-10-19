@@ -13,6 +13,7 @@
     "seed:room-images": "node --env-file=.env.local scripts/seed-room-images.mjs",
     "setup:admin": "node --env-file=.env.local scripts/setup-admin.mjs",
     "test:booking-concurrency": "node --env-file=.env.local scripts/test-booking-concurrency.mjs",
+    "test:booking-receipt": "node --experimental-strip-types --conditions=react-server scripts/test-booking-receipt.mjs",
     "test:supabase-security": "node --env-file=.env.local scripts/test-supabase-security.mjs"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "next": "16.2.11",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "server-only": "^0.0.1",
     "sharp": "0.33.5"
   },
   "devDependencies": {
