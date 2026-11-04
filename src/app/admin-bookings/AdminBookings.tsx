@@ -24,6 +24,10 @@ type Booking = {
   currency: string;
   admin_notes: string | null;
   confirmed_at: string | null;
+  confirmation_email_status: "sent" | "failed" | "not_configured";
+  confirmation_email_provider_id: string | null;
+  confirmation_email_sent_at: string | null;
+  confirmation_email_last_error: string | null;
   receipt_email_status: "sent" | "failed" | "not_configured";
   receipt_email_provider_id: string | null;
   receipt_email_sent_at: string | null;
@@ -86,6 +90,7 @@ export function AdminBookings() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [retryingReceipt, setRetryingReceipt] = useState(false);
+  const [retryingConfirmation, setRetryingConfirmation] = useState(false);
   const [receiptNotice, setReceiptNotice] = useState("");
   const [error, setError] = useState("");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -237,13 +242,14 @@ export function AdminBookings() {
     setSaving(true);
     setError("");
     try {
-      const payload = await requestJson<{ booking: Booking }>(`/api/admin/bookings/${booking.id}`, {
+      const payload = await requestJson<{ booking: Booking; message?: string }>(`/api/admin/bookings/${booking.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: nextStatus, adminNotes: notes }),
       });
       setBookings((items) => items.map((item) => item.id === booking.id ? payload.booking : item));
       setSelected((current) => current?.id === booking.id ? payload.booking : current);
+      if (payload.message) setReceiptNotice(payload.message);
     } catch (caught) {
       setError((caught as Error).message);
     } finally {
@@ -267,6 +273,25 @@ export function AdminBookings() {
       setError((caught as Error).message);
     } finally {
       setRetryingReceipt(false);
+    }
+  }
+
+  async function retryConfirmation(booking: Booking) {
+    setRetryingConfirmation(true);
+    setReceiptNotice("");
+    setError("");
+    try {
+      const payload = await requestJson<{ booking: Booking; message: string }>(
+        `/api/admin/bookings/${booking.id}/confirmation`,
+        { method: "POST" },
+      );
+      setBookings((items) => items.map((item) => item.id === booking.id ? payload.booking : item));
+      setSelected(payload.booking);
+      setReceiptNotice(payload.message);
+    } catch (caught) {
+      setError((caught as Error).message);
+    } finally {
+      setRetryingConfirmation(false);
     }
   }
 
@@ -417,9 +442,9 @@ export function AdminBookings() {
       </section>
     </div> : null}
 
-    {selected ? <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget && !retryingReceipt) { setReceiptNotice(""); setSelected(null); } }}>
+    {selected ? <div className={styles.backdrop} onMouseDown={(event) => { if (event.target === event.currentTarget && !retryingReceipt && !retryingConfirmation) { setReceiptNotice(""); setSelected(null); } }}>
       <section className={styles.drawer} role="dialog" aria-modal="true" aria-labelledby="bookingDetailsTitle">
-        <div className={styles.drawerHeader}><div><p className={styles.eyebrow}>Complete booking record</p><h2 id="bookingDetailsTitle">{selected.guest_first_name} {selected.guest_last_name}</h2></div><button disabled={retryingReceipt} onClick={() => { setReceiptNotice(""); setSelected(null); }} aria-label="Close booking details">×</button></div>
+        <div className={styles.drawerHeader}><div><p className={styles.eyebrow}>Complete booking record</p><h2 id="bookingDetailsTitle">{selected.guest_first_name} {selected.guest_last_name}</h2></div><button disabled={retryingReceipt || retryingConfirmation} onClick={() => { setReceiptNotice(""); setSelected(null); }} aria-label="Close booking details">×</button></div>
         <div className={styles.detailGrid}>{[
           ["Confirmation", selected.confirmation_code], ["Room", selected.room_types?.name ?? "Unknown room"],
           ["Number of rooms", String(selected.room_count)],
@@ -430,10 +455,14 @@ export function AdminBookings() {
           ["Confirmed", dateTime(selected.confirmed_at)],
           ["Receipt delivery", selected.receipt_email_status === "not_configured" ? "Awaiting sender configuration" : selected.receipt_email_status],
           ["Receipt sent", selected.receipt_email_sent_at ? dateTime(selected.receipt_email_sent_at) : "Not sent"],
+          ["Final confirmation", selected.confirmation_email_status === "not_configured" ? "Not sent" : selected.confirmation_email_status],
+          ["Confirmation sent", selected.confirmation_email_sent_at ? dateTime(selected.confirmation_email_sent_at) : "Not sent"],
         ].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
         {selected.receipt_email_last_error ? <div className={styles.receiptError} role="alert"><strong>Last delivery error</strong><span>{selected.receipt_email_last_error}</span></div> : null}
+        {selected.confirmation_email_last_error ? <div className={styles.receiptError} role="alert"><strong>Final confirmation error</strong><span>{selected.confirmation_email_last_error}</span></div> : null}
         {receiptNotice ? <div className={styles.receiptNotice} role="status">{receiptNotice}</div> : null}
         {selected.receipt_email_status !== "sent" ? <button className={styles.secondaryActionFull} disabled={retryingReceipt} onClick={() => void retryReceipt(selected)}>{retryingReceipt ? "Sending receipt…" : selected.receipt_email_status === "failed" ? "Retry receipt" : "Send receipt"}</button> : null}
+        {selected.status === "confirmed" && selected.confirmation_email_status !== "sent" ? <button className={styles.secondaryActionFull} disabled={retryingConfirmation} onClick={() => void retryConfirmation(selected)}>{retryingConfirmation ? "Sending confirmation…" : selected.confirmation_email_status === "failed" ? "Retry final confirmation" : "Send final confirmation"}</button> : null}
         <label className={styles.drawerField}><span>Status</span><select className="booking-status" data-status={selected.status} value={selected.status} disabled={getManualBookingStatusOptions(selected.status).length < 2} onChange={(event) => setSelected({ ...selected, status: event.target.value })}>{getManualBookingStatusOptions(selected.status).map((item) => <option key={item} value={item}>{item[0].toUpperCase() + item.slice(1)}</option>)}</select></label>
         <label className={styles.drawerField}><span>Admin notes</span><textarea value={selected.admin_notes ?? ""} placeholder="Add internal notes about this booking" onChange={(event) => setSelected({ ...selected, admin_notes: event.target.value })}/></label>
         <button className={styles.save} disabled={saving} onClick={() => void updateBooking(selected, selected.status, selected.admin_notes ?? "")}>{saving ? "Saving…" : "Save booking changes"}</button>

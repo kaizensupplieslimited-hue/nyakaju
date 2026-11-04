@@ -21,6 +21,10 @@ export type Database = {
           arrival_date: string
           children_count: number
           confirmed_at: string | null
+          confirmation_email_last_error: string | null
+          confirmation_email_provider_id: string | null
+          confirmation_email_sent_at: string | null
+          confirmation_email_status: string
           confirmation_code: string
           created_at: string
           currency: string
@@ -48,6 +52,10 @@ export type Database = {
           arrival_date: string
           children_count?: number
           confirmed_at?: string | null
+          confirmation_email_last_error?: string | null
+          confirmation_email_provider_id?: string | null
+          confirmation_email_sent_at?: string | null
+          confirmation_email_status?: string
           confirmation_code: string
           created_at?: string
           currency?: string
@@ -75,6 +83,10 @@ export type Database = {
           arrival_date?: string
           children_count?: number
           confirmed_at?: string | null
+          confirmation_email_last_error?: string | null
+          confirmation_email_provider_id?: string | null
+          confirmation_email_sent_at?: string | null
+          confirmation_email_status?: string
           confirmation_code?: string
           created_at?: string
           currency?: string

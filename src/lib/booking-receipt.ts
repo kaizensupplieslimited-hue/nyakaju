@@ -147,7 +147,62 @@ export function renderBookingReceipt(receipt: BookingReceipt) {
   return { html, text };
 }
 
-export async function sendBookingReceipt(receipt: BookingReceipt): Promise<ReceiptDeliveryResult> {
+export function renderBookingConfirmation(receipt: BookingReceipt) {
+  const rows = receiptRows(receipt);
+  const htmlRows = rows.map(([label, value]) => `
+    <tr>
+      <td style="padding:12px 0;border-bottom:1px solid #ebe7df;color:#71695e;font-size:13px;vertical-align:top">${escapeHtml(label)}</td>
+      <td style="padding:12px 0;border-bottom:1px solid #ebe7df;color:#1a1c1c;font-size:14px;font-weight:600;text-align:right;vertical-align:top">${escapeHtml(value)}</td>
+    </tr>`).join("");
+
+  const html = `<!doctype html>
+<html lang="en" dir="ltr">
+  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Booking ${escapeHtml(receipt.confirmationCode)} confirmed</title></head>
+  <body style="margin:0;background:#f5f3ef;color:#1a1c1c;font-family:Montserrat,Arial,sans-serif">
+    <div lang="en" dir="ltr" style="display:none;max-height:0;overflow:hidden">Your stay at The Nyakaju is confirmed.</div>
+    <table lang="en" dir="ltr" role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f5f3ef;padding:28px 12px">
+      <tr><td align="center">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:620px;background:#ffffff;border:1px solid #ded8ce;border-radius:18px;overflow:hidden">
+          <tr><td style="background:#1a1c1c;padding:28px 34px;color:#ffffff">
+            <div style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#d8c9ae">The Nyakaju</div>
+            <h1 style="margin:14px 0 6px;font-size:26px;line-height:1.25">Your booking is confirmed</h1>
+            <p style="margin:0;color:#dedbd5;font-size:14px;line-height:1.6">We look forward to welcoming you.</p>
+          </td></tr>
+          <tr><td style="padding:30px 34px">
+            <p style="margin:0 0 8px;color:#71695e;font-size:12px;letter-spacing:.12em;text-transform:uppercase">Booking code</p>
+            <p style="margin:0 0 24px;color:#675d4b;font-size:28px;font-weight:700;letter-spacing:.04em">${escapeHtml(receipt.confirmationCode)}</p>
+            <p style="margin:0 0 22px;font-size:16px;line-height:1.7">Hello ${escapeHtml(receipt.guestFirstName)}, your stay at The Nyakaju is now confirmed. Please keep this email and your booking code for check-in and future correspondence.</p>
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0">${htmlRows}</table>
+            <div style="margin-top:26px;padding:18px;border-radius:12px;background:#f3f0ea;color:#4b463e;font-size:13px;line-height:1.7">
+              Questions or changes? Contact The Nyakaju at <a href="mailto:info@thenyakaju.com" style="color:#675d4b">info@thenyakaju.com</a> or +256 782 173 076.
+            </div>
+          </td></tr>
+        </table>
+      </td></tr>
+    </table>
+  </body>
+</html>`;
+
+  const text = [
+    "THE NYAKAJU — BOOKING CONFIRMED",
+    "",
+    `Booking code: ${receipt.confirmationCode}`,
+    "Status: Confirmed",
+    "",
+    `Hello ${receipt.guestFirstName}, your stay at The Nyakaju is now confirmed. Please keep this email and your booking code for check-in and future correspondence.`,
+    "",
+    ...rows.map(([label, value]) => `${label}: ${value}`),
+    "",
+    "Questions or changes? Contact info@thenyakaju.com or +256 782 173 076.",
+  ].join("\n");
+
+  return { html, text };
+}
+
+async function sendEmail(
+  receipt: BookingReceipt,
+  kind: "receipt" | "confirmation",
+): Promise<ReceiptDeliveryResult> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   const from = process.env.BOOKING_EMAIL_FROM?.trim();
   const replyTo = process.env.BOOKING_EMAIL_REPLY_TO?.trim() || DEFAULT_REPLY_TO;
@@ -161,18 +216,23 @@ export async function sendBookingReceipt(receipt: BookingReceipt): Promise<Recei
   }
 
   try {
-    const { html, text } = renderBookingReceipt(receipt);
+    const { html, text } = kind === "receipt"
+      ? renderBookingReceipt(receipt)
+      : renderBookingConfirmation(receipt);
+    const isReceipt = kind === "receipt";
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        "Idempotency-Key": `booking-receipt/${receipt.confirmationCode}`,
+        "Idempotency-Key": `booking-${kind}/${receipt.confirmationCode}`,
       },
       body: JSON.stringify({
         from,
         to: [receipt.guestEmail],
-        subject: `Booking request ${receipt.confirmationCode} received`,
+        subject: isReceipt
+          ? `Booking request ${receipt.confirmationCode} received`
+          : `Booking ${receipt.confirmationCode} confirmed`,
         html,
         text,
         reply_to: replyTo,
@@ -201,4 +261,12 @@ export async function sendBookingReceipt(receipt: BookingReceipt): Promise<Recei
       error: (error instanceof Error ? error.message : "Email delivery failed.").slice(0, 1_000),
     };
   }
+}
+
+export async function sendBookingReceipt(receipt: BookingReceipt): Promise<ReceiptDeliveryResult> {
+  return sendEmail(receipt, "receipt");
+}
+
+export async function sendBookingConfirmation(receipt: BookingReceipt): Promise<ReceiptDeliveryResult> {
+  return sendEmail(receipt, "confirmation");
 }

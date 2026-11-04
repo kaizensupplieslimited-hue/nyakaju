@@ -31,11 +31,11 @@ The setup command also assigns the protected `admin` role in Supabase app metada
 
 ## Booking receipt email
 
-Booking requests are saved even when email delivery is not configured or the provider is temporarily unavailable. To enable pending booking-request receipts, add these server-only environment variables locally and in the deployment environment:
+Booking requests are saved even when email delivery is not configured or the provider is temporarily unavailable. The guest receives a request receipt after submission and a separate final confirmation when an administrator confirms the booking. To enable both messages, add these server-only environment variables locally and in the deployment environment:
 
 ```dotenv
 RESEND_API_KEY=re_...
-BOOKING_EMAIL_FROM=The Nyakaju <bookings@your-verified-domain.example>
+BOOKING_EMAIL_FROM=The Nyakaju <info@thenyakaju.com>
 BOOKING_EMAIL_REPLY_TO=info@thenyakaju.com
 BOOKING_CHECK_IN_TIME=2:00 PM East Africa Time
 CONTACT_EMAIL_FROM=The Nyakaju Website <website@thenyakaju.com>

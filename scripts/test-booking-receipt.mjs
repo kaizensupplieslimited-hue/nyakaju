@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import {
+  renderBookingConfirmation,
   renderBookingReceipt,
+  sendBookingConfirmation,
   sendBookingReceipt,
 } from "../src/lib/booking-receipt.ts";
 
@@ -44,7 +46,7 @@ assert.equal(delivery.providerMessageId, null);
 assert.equal(delivery.error, null);
 
 process.env.RESEND_API_KEY = "test-key";
-process.env.BOOKING_EMAIL_FROM = "The Nyakaju <bookings@example.com>";
+process.env.BOOKING_EMAIL_FROM = "The Nyakaju <info@thenyakaju.com>";
 delete process.env.BOOKING_EMAIL_REPLY_TO;
 
 let capturedRequest;
@@ -59,6 +61,7 @@ assert.match(failedDelivery.error, /Provider unavailable/);
 assert.equal(capturedRequest.url, "https://api.resend.com/emails");
 assert.equal(capturedRequest.init.headers["Idempotency-Key"], "booking-receipt/NYK-TEST123");
 const requestBody = JSON.parse(capturedRequest.init.body);
+assert.equal(requestBody.from, "The Nyakaju <info@thenyakaju.com>");
 assert.deepEqual(requestBody.to, ["amina@example.com"]);
 assert.equal(requestBody.reply_to, "info@thenyakaju.com");
 assert.match(requestBody.text, /Check-in time: 2:00 PM East Africa Time/);
@@ -69,4 +72,23 @@ assert.equal(sentDelivery.status, "sent");
 assert.equal(sentDelivery.providerMessageId, "email_123");
 assert.equal(sentDelivery.error, null);
 
-console.log("Receipt rendering, recipient, idempotency, fallback, failure, and success tests passed.");
+const confirmation = renderBookingConfirmation({ ...receipt, status: "confirmed" });
+assert.match(confirmation.html, /Your booking is confirmed/);
+assert.match(confirmation.html, /<title>Booking NYK-TEST123 confirmed<\/title>/);
+assert.match(confirmation.text, /Status: Confirmed/);
+
+capturedRequest = undefined;
+globalThis.fetch = async (url, init) => {
+  capturedRequest = { url, init };
+  return Response.json({ id: "email_confirmation_123" });
+};
+const confirmationDelivery = await sendBookingConfirmation({ ...receipt, status: "confirmed" });
+assert.equal(confirmationDelivery.status, "sent");
+assert.equal(confirmationDelivery.providerMessageId, "email_confirmation_123");
+assert.equal(capturedRequest.init.headers["Idempotency-Key"], "booking-confirmation/NYK-TEST123");
+const confirmationRequest = JSON.parse(capturedRequest.init.body);
+assert.equal(confirmationRequest.from, "The Nyakaju <info@thenyakaju.com>");
+assert.equal(confirmationRequest.subject, "Booking NYK-TEST123 confirmed");
+assert.deepEqual(confirmationRequest.to, ["amina@example.com"]);
+
+console.log("Booking receipt and final confirmation rendering and delivery tests passed.");
