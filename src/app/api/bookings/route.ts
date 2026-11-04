@@ -100,6 +100,7 @@ export async function POST(request: Request) {
       bookingId: booking.booking_id,
       confirmationCode: booking.booking_confirmation_code,
       status: booking.booking_status,
+      bookedAt: new Date().toISOString(),
       guestFirstName: firstName,
       guestLastName: lastName,
       guestEmail: email,

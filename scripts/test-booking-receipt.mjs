@@ -11,6 +11,7 @@ const receipt = {
   bookingId: 42,
   confirmationCode: "NYK-TEST123",
   status: "pending",
+  bookedAt: "2026-11-04T09:30:00+03:00",
   guestFirstName: "Amina",
   guestLastName: "N.",
   guestEmail: "amina@example.com",
@@ -31,6 +32,11 @@ assert.match(rendered.html, /amina@example\.com/);
 assert.match(rendered.text, /NYK-TEST123/);
 assert.match(rendered.text, /3 nights/);
 assert.match(rendered.text, /\$600/);
+assert.match(rendered.text, /Booking submitted: November 4, 2026 at 9:30 AM/);
+assert.match(rendered.text, /Check-in date: November 10, 2026/);
+assert.match(rendered.text, /Check-in time: 2:00 PM East Africa Time/);
+assert.match(rendered.text, /Departure date: November 13, 2026/);
+assert.match(rendered.html, /<title>Booking request NYK-TEST123 received<\/title>/);
 
 const delivery = await sendBookingReceipt(receipt);
 assert.equal(delivery.status, "not_configured");
@@ -39,7 +45,7 @@ assert.equal(delivery.error, null);
 
 process.env.RESEND_API_KEY = "test-key";
 process.env.BOOKING_EMAIL_FROM = "The Nyakaju <bookings@example.com>";
-process.env.BOOKING_EMAIL_REPLY_TO = "info@example.com";
+delete process.env.BOOKING_EMAIL_REPLY_TO;
 
 let capturedRequest;
 globalThis.fetch = async (url, init) => {
@@ -54,7 +60,8 @@ assert.equal(capturedRequest.url, "https://api.resend.com/emails");
 assert.equal(capturedRequest.init.headers["Idempotency-Key"], "booking-receipt/NYK-TEST123");
 const requestBody = JSON.parse(capturedRequest.init.body);
 assert.deepEqual(requestBody.to, ["amina@example.com"]);
-assert.equal(requestBody.reply_to, "info@example.com");
+assert.equal(requestBody.reply_to, "info@thenyakaju.com");
+assert.match(requestBody.text, /Check-in time: 2:00 PM East Africa Time/);
 
 globalThis.fetch = async () => Response.json({ id: "email_123" });
 const sentDelivery = await sendBookingReceipt(receipt);

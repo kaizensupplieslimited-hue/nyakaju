@@ -36,6 +36,7 @@ export async function POST(_request: Request, { params }: RouteContext) {
     bookingId: booking.id,
     confirmationCode: booking.confirmation_code,
     status: booking.status,
+    bookedAt: booking.created_at,
     guestFirstName: booking.guest_first_name,
     guestLastName: booking.guest_last_name,
     guestEmail: booking.guest_email,
