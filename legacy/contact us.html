@@ -308,7 +308,7 @@
 <span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
 <div>
 <p class="font-label-lg text-label-lg text-on-surface uppercase tracking-widest mb-1 transition-colors duration-300 hover:text-primary">Email</p>
-<a class="font-body-md text-body-md text-on-surface-variant transition-colors duration-300 hover:text-primary" href="mailto:info@nyakaju.com">info@nyakaju.com</a>
+<a class="font-body-md text-body-md text-on-surface-variant transition-colors duration-300 hover:text-primary" href="mailto:info@thenyakaju.com">info@thenyakaju.com</a>
 </div>
 </div>
 </div>
@@ -316,26 +316,31 @@
 </div>
 <!-- Contact Form -->
 <div class="md:col-span-7 lg:col-span-8 xl:col-span-7 mx-auto w-full max-w-2xl bg-surface-container-lowest p-8 md:p-12 rounded-lg shadow-[0_10px_40px_rgba(0,0,0,0.04)] h-full reveal" data-reveal-delay="0.12s">
-<form class="space-y-8">
+<form id="contactForm" class="space-y-8">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 <div class="contact-field relative">
-<input type="text" id="name" name="name" autocomplete="name" class="contact-input font-body-md text-body-md" placeholder=" ">
+<input type="text" id="name" name="name" autocomplete="name" maxlength="100" required class="contact-input font-body-md text-body-md" placeholder=" ">
 <label for="name" class="contact-label font-body-md text-body-md">Name</label>
 </div>
 <div class="contact-field relative">
-<input type="email" id="email" name="email" autocomplete="email" class="contact-input font-body-md text-body-md" placeholder=" ">
+<input type="email" id="email" name="email" autocomplete="email" maxlength="320" required class="contact-input font-body-md text-body-md" placeholder=" ">
 <label for="email" class="contact-label font-body-md text-body-md">Email Address</label>
 </div>
 </div>
 <div class="contact-field contact-field--message relative">
-<textarea id="message" name="message" rows="6" class="contact-input font-body-md text-body-md resize-none" placeholder=" "></textarea>
+<textarea id="message" name="message" rows="6" maxlength="5000" required class="contact-input font-body-md text-body-md resize-none" placeholder=" "></textarea>
 <label for="message" class="contact-label font-body-md text-body-md">Message</label>
 </div>
+<div class="sr-only" aria-hidden="true">
+<label for="website">Website</label>
+<input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+</div>
 <div class="flex pt-4 justify-center">
-<button type="submit" class="bg-[#000000] text-[#ffffff] px-8 py-4 rounded-full font-label-lg text-label-lg uppercase tracking-widest hover:bg-surface-tint transition-colors duration-300">
+<button type="submit" data-contact-submit class="bg-[#000000] text-[#ffffff] px-8 py-4 rounded-full font-label-lg text-label-lg uppercase tracking-widest hover:bg-surface-tint transition-colors duration-300 disabled:cursor-wait disabled:opacity-60">
                                 SEND MESSAGE
                             </button>
 </div>
+<p id="contactFormMessage" class="hidden rounded-lg px-4 py-3 text-center font-body-md" role="status" aria-live="polite"></p>
 </form>
 </div>
 </div>

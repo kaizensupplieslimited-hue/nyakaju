@@ -1044,6 +1044,9 @@ function setupGalleryPage(): Cleanup[] {
 function setupContactPage(): Cleanup[] {
   const cleanups: Cleanup[] = [];
   const header = document.querySelector<HTMLElement>("header");
+  const form = document.getElementById("contactForm") as HTMLFormElement | null;
+  const formMessage = document.getElementById("contactFormMessage");
+  const submitButton = form?.querySelector<HTMLButtonElement>("[data-contact-submit]") ?? null;
 
   if (header) {
     const scrollHandler = () => {
@@ -1068,6 +1071,45 @@ function setupContactPage(): Cleanup[] {
     cleanups.push(addListener(input, "change", syncFilledState));
     cleanups.push(addListener(input, "blur", syncFilledState));
   });
+
+  if (form && formMessage && submitButton) {
+    const submitHandler = async (event: Event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const formData = new FormData(form);
+      submitButton.disabled = true;
+      submitButton.textContent = "SENDING…";
+      formMessage.className = "rounded-lg bg-primary-container px-4 py-3 text-center font-body-md text-on-primary-container";
+      formMessage.textContent = "Sending your message…";
+
+      try {
+        const result = await fetchJson<{ message: string }>("/api/contact", {
+          method: "POST",
+          body: JSON.stringify({
+            submissionId: crypto.randomUUID(),
+            name: formData.get("name"),
+            email: formData.get("email"),
+            message: formData.get("message"),
+            website: formData.get("website"),
+          }),
+        });
+        form.reset();
+        form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(".contact-input")
+          .forEach((input) => input.classList.remove("filled"));
+        formMessage.className = "rounded-lg bg-green-100 px-4 py-3 text-center font-body-md text-green-900";
+        formMessage.textContent = result.message;
+      } catch (error) {
+        formMessage.className = "rounded-lg bg-red-100 px-4 py-3 text-center font-body-md text-red-900";
+        formMessage.textContent = (error as Error).message;
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "SEND MESSAGE";
+      }
+    };
+
+    cleanups.push(addListener(form, "submit", submitHandler));
+  }
 
   return cleanups;
 }

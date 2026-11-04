@@ -38,9 +38,10 @@ RESEND_API_KEY=re_...
 BOOKING_EMAIL_FROM=The Nyakaju <bookings@your-verified-domain.example>
 BOOKING_EMAIL_REPLY_TO=info@thenyakaju.com
 BOOKING_CHECK_IN_TIME=2:00 PM East Africa Time
+CONTACT_EMAIL_FROM=The Nyakaju Website <website@thenyakaju.com>
 ```
 
-`BOOKING_EMAIL_REPLY_TO` and `BOOKING_CHECK_IN_TIME` are optional. Replies default to `info@thenyakaju.com`, and check-in defaults to `2:00 PM East Africa Time`. `BOOKING_EMAIL_FROM` must use a sender identity verified in Resend. The receipt is always sent automatically to the normalized email address entered by the guest; there is no fixed recipient address.
+`BOOKING_EMAIL_REPLY_TO`, `BOOKING_CHECK_IN_TIME`, and `CONTACT_EMAIL_FROM` are optional. Replies default to `info@thenyakaju.com`, check-in defaults to `2:00 PM East Africa Time`, and contact messages fall back to `BOOKING_EMAIL_FROM`. Sender addresses must use the verified Resend domain. Booking receipts go to the guest; contact-form messages always go to `info@thenyakaju.com`.
 
 Apply the latest Supabase migration before deploying the application changes:
 
