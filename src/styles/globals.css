@@ -776,9 +776,11 @@ html.reveal-enhanced .reveal-right:not(.reveal-visible) {
 
 @media (max-width: 380px), (max-height: 600px) {
   #hero-bar {
-    right: 0.75rem;
-    left: 0.75rem;
+    right: auto;
+    left: 50vw;
+    width: calc(100vw - 1.5rem);
     bottom: max(0.75rem, env(safe-area-inset-bottom));
+    translate: -50% 0;
   }
 
   .booking-popover__header {
