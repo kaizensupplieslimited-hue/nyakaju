@@ -117,7 +117,7 @@
   <a href="index.html" class="font-display-lg text-display-lg-mobile md:text-display-lg font-bold text-on-surface hover:text-primary transition-colors duration-300 flex-1">
   <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt7Rfwv7VSkvvhHrE9nLrlCRgdSzE_k7PWip22Y3v5AFJrf1tHfYbqmjRlmbzz1EZkTyFUPk8HvXzVt4kl4pZfLtGq3wozZEtl6soPrcpSmgXP8E151u_KMwGPrGAQWrc0m8BZ98qRxc_WJAkw9cT16dSyETjbC5SLrSuD8KkVTdFHqjU1TdTrjkgg3MrcD-o_NJVYlG7QwNY0FdArtd7KEMO7wtTvBQEk3oJUAhXkLmC1nReLCSaEfbyyLvhP6X-g21p-RwdiaA" alt="The Nyakaju Logo" class="h-6 md:h-8 w-auto object-contain">
 </a>
-<nav class="hidden md:flex items-center justify-center gap-8 flex-1">
+<nav class="hidden lg:flex items-center justify-center gap-8 flex-1">
   <a href="index.html" class="font-label-lg text-label-lg uppercase tracking-widest text-primary hover:text-primary transition-colors duration-300">Home</a>
   <a href="rooms.html" class="font-label-lg text-label-lg uppercase tracking-widest text-primary hover:text-primary transition-colors duration-300">Rooms</a>
   <a href="gallery.html" class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b-2 border-primary pb-1">Gallery</a>
@@ -125,13 +125,23 @@
   <a href="contact us.html" class="font-label-lg text-label-lg uppercase tracking-widest text-primary hover:text-primary transition-colors duration-300">Contact</a>
 </nav>
 <div class="flex-1 flex justify-end items-center gap-4">
-  <a href="rooms.html" class="bg-[#000000] text-on-primary px-8 py-3 rounded-full font-label-lg text-label-lg uppercase tracking-widest flex items-center gap-2 hover:scale-105 transition-transform duration-500 hidden md:flex">
+  <a href="rooms.html" class="bg-[#000000] text-on-primary px-8 py-3 rounded-full font-label-lg text-label-lg uppercase tracking-widest flex items-center gap-2 hover:scale-105 transition-transform duration-500 hidden lg:flex">
     Book now
   </a>
-  <button class="md:hidden text-on-surface p-2">
-    <span class="material-symbols-outlined">menu</span>
+  <button type="button" class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant text-on-surface" aria-controls="mobile-navigation" aria-expanded="false" aria-label="Open navigation menu" data-mobile-menu-toggle>
+    <span class="material-symbols-outlined" data-mobile-menu-icon>menu</span>
   </button>
 </div></div>
+<nav id="mobile-navigation" class="hidden lg:hidden bg-surface-container-lowest border-t border-outline-variant shadow-xl px-margin-mobile md:px-margin-desktop py-4" data-mobile-menu>
+  <div class="flex flex-col">
+    <a class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b border-outline-variant py-3" href="index.html">Home</a>
+    <a class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b border-outline-variant py-3" href="rooms.html">Rooms</a>
+    <a class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b-2 border-primary py-3" href="gallery.html">Gallery</a>
+    <a class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b border-outline-variant py-3" href="about.html">About</a>
+    <a class="font-label-lg text-label-lg uppercase tracking-widest text-primary py-3" href="contact us.html">Contact</a>
+    <a class="mt-3 flex items-center justify-center rounded-full bg-black px-6 py-3 font-label-lg text-label-lg uppercase tracking-widest text-on-primary" href="rooms.html">Book now</a>
+  </div>
+</nav>
 </header>
 <!-- Hero Section -->
 <section class="pt-[160px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center">
@@ -141,7 +151,7 @@
 <!-- Gallery Carousel Section -->
 <section class="pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
 <div id="galleryCarousel" class="mx-auto w-full reveal" data-reveal-delay="0.18s" role="region" aria-roledescription="carousel" aria-label="The Nyakaju gallery" tabindex="0">
-<div class="mx-auto grid w-full max-w-3xl grid-cols-[2.5rem_minmax(0,1fr)_2.5rem] items-center gap-3 md:hidden">
+<div class="mx-auto grid w-full max-w-3xl grid-cols-[2.5rem_minmax(0,1fr)_2.5rem] items-center gap-3 lg:hidden">
 <button type="button" data-gallery-action="previous" class="flex h-10 w-10 items-center justify-center justify-self-end rounded-full border border-primary/30 bg-surface-container-lowest text-primary shadow-sm transition-all duration-300 hover:border-primary hover:bg-primary hover:text-on-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-4" aria-controls="galleryImage" aria-label="Previous gallery image">
 <span class="material-symbols-outlined text-[22px] md:text-[26px]" aria-hidden="true">arrow_back</span>
 </button>
@@ -155,7 +165,7 @@
 <span class="material-symbols-outlined text-[22px] md:text-[26px]" aria-hidden="true">arrow_forward</span>
 </button>
 </div>
-<div class="mx-auto hidden max-w-[1240px] md:block">
+<div class="mx-auto hidden max-w-[1240px] lg:block">
 <div id="galleryDesktopImages" class="grid grid-cols-[0.9fr_1.08fr_0.9fr] items-end gap-5 lg:gap-8">
 <figure class="min-w-0 pb-5 lg:pb-8">
 <div class="aspect-[4/5] w-full overflow-hidden rounded-t-full bg-surface-container-low shadow-[0_20px_55px_rgba(47,49,49,0.14)]">

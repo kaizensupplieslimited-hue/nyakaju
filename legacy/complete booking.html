@@ -186,7 +186,7 @@
 </a>
 </div>
 <!-- Desktop Nav Centered -->
-<nav class="hidden md:flex gap-8 items-center flex-1 justify-center">
+<nav class="hidden lg:flex gap-8 items-center flex-1 justify-center">
 <a href="index.html" class="text-on-surface-variant font-medium hover:text-primary transition-colors transition-all duration-300 ease-in-out hover:scale-105 transition-transform">HOME</a>
 <a href="rooms.html" class="text-on-surface-variant font-medium hover:text-primary transition-colors transition-all duration-300 ease-in-out hover:scale-105 transition-transform">ROOMS</a>
 <a href="gallery.html" class="text-on-surface-variant font-medium hover:text-primary transition-colors transition-all duration-300 ease-in-out hover:scale-105 transition-transform">GALLERY</a>
@@ -195,12 +195,22 @@
 </nav>
 <!-- Right Side Actions -->
 <div class="flex items-center justify-end">
-<a href="rooms.html" class="hidden md:inline-flex items-center justify-center px-6 py-3 bg-on-surface text-on-primary rounded-full font-label-lg text-label-lg uppercase tracking-widest hover:bg-primary transition-colors duration-300 shadow-sm">Book now</a>
+<a href="rooms.html" class="hidden lg:inline-flex items-center justify-center px-6 py-3 bg-on-surface text-on-primary rounded-full font-label-lg text-label-lg uppercase tracking-widest hover:bg-primary transition-colors duration-300 shadow-sm">Book now</a>
 <!-- Mobile Menu Toggle -->
-<button class="md:hidden text-on-surface">
-<span class="material-symbols-outlined">menu</span>
+<button type="button" class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-outline-variant text-on-surface" aria-controls="mobile-navigation" aria-expanded="false" aria-label="Open navigation menu" data-mobile-menu-toggle>
+<span class="material-symbols-outlined" data-mobile-menu-icon>menu</span>
 </button>
 </div></div>
+<nav id="mobile-navigation" class="hidden lg:hidden bg-surface-container-lowest border-t border-outline-variant shadow-xl px-margin-mobile md:px-margin-desktop py-4" data-mobile-menu>
+<div class="flex flex-col normal-case tracking-normal">
+<a class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b border-outline-variant py-3" href="index.html">Home</a>
+<a class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b border-outline-variant py-3" href="rooms.html">Rooms</a>
+<a class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b border-outline-variant py-3" href="gallery.html">Gallery</a>
+<a class="font-label-lg text-label-lg uppercase tracking-widest text-primary border-b border-outline-variant py-3" href="about.html">About</a>
+<a class="font-label-lg text-label-lg uppercase tracking-widest text-primary py-3" href="contact us.html">Contact</a>
+<a class="mt-3 flex items-center justify-center rounded-full bg-on-surface px-6 py-3 font-label-lg text-label-lg uppercase tracking-widest text-on-primary" href="rooms.html">Book now</a>
+</div>
+</nav>
 </header>
 <!-- Main Content Canvas -->
 <main id="completeBookingMain" class="pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto min-h-screen">

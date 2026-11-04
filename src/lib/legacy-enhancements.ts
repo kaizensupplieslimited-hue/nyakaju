@@ -674,7 +674,7 @@ function setupMobileNavigation(): Cleanup[] {
     }
   };
   const closeAtDesktopWidth = () => {
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 1024) {
       setOpen(false);
     }
   };
