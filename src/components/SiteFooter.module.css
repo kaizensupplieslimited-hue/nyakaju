@@ -10,7 +10,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background-image: url("/media/home_slides/slide_5-768.webp");
+  background-image: url("/media/home_slides/slide_7-1920.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -202,6 +202,10 @@
 }
 
 @media (max-width: 767px) {
+  .imageSection {
+    background-image: url("/media/home_slides/slide_7-768.webp");
+  }
+
   .content {
     width: min(100% - 40px, 1312px);
     padding: 64px 0 48px;
